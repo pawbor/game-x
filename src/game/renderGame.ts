@@ -1,6 +1,10 @@
+import * as mCamera from './camera';
+import { initCharacters } from './characters';
 import { gameLoop } from './gameLoop';
+import { initGrass, renderGrass } from './grass';
+import { initBoundaries, renderGround } from './ground';
 import { keyboard } from './keyboard';
-import { playerMove, position } from './player';
+import { movePlayer, renderPlayer } from './player';
 
 export function renderGame(parent: HTMLElement) {
   const canvas = document.createElement('canvas');
@@ -12,14 +16,56 @@ export function renderGame(parent: HTMLElement) {
   });
   observer.observe(parent);
 
-  const ctx = canvas.getContext('2d');
+  const canvasCtx = canvas.getContext('2d');
+  if (!canvasCtx) {
+    throw new Error('Canvas not supported');
+  }
   const { pressedKeys } = keyboard();
+  const camera = mCamera.create();
+  const { player } = initCharacters();
+  const { boundaries } = initBoundaries();
+  const { grass } = initGrass();
 
-  gameLoop(({ framesDiff }) => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    playerMove({ pressedKeys, timeDiff: framesDiff });
-    ctx.fillRect(position[0], position[1], 30, 30);
+  gameLoop((loopCtx) => {
+    movePlayer({
+      player,
+      pressedKeys,
+      loopCtx,
+      obstacles: [
+        ...boundaries.map((x) => x.hitBox),
+        ...grass.map((x) => x.hitBox),
+      ],
+    });
+    mCamera.followPlayer({ player, camera });
+    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+    renderGround({ canvasCtx, camera });
+    renderInOrder([
+      ...grass.map(
+        (x): SortableSprite => ({
+          ordinal: x.position[1],
+          render() {
+            renderGrass({ canvasCtx, camera, grass: x });
+          },
+        })
+      ),
+      {
+        ordinal: player.position[1],
+        render() {
+          renderPlayer({ canvasCtx, camera, player });
+        },
+      },
+    ]);
   });
 }
 
+interface SortableSprite {
+  ordinal: number;
+  render(): void;
+}
 
+function renderInOrder(sprites: SortableSprite[]) {
+  sprites
+    .slice()
+    .sort((s1, s2) => s1.ordinal - s2.ordinal)
+    .forEach((s) => s.render());
+}

@@ -1,5 +1,5 @@
 export function keyboard() {
-  const pressedKeys = {};
+  const pressedKeys: Record<string, boolean> = {};
 
   document.addEventListener('keydown', (event) => {
     pressedKeys[event.key] = true;
