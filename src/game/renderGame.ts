@@ -1,5 +1,6 @@
 import * as mCamera from './camera';
 import { initCharacters } from './characters';
+import { createFpsCounter } from './fps';
 import { gameLoop } from './gameLoop';
 import { initGrass, renderGrass } from './grass';
 import { initBoundaries, renderGround } from './ground';
@@ -25,8 +26,10 @@ export function renderGame(parent: HTMLElement) {
   const { player } = initCharacters();
   const { boundaries } = initBoundaries();
   const { grass } = initGrass();
+  const fpsCounter = createFpsCounter();
 
   gameLoop((loopCtx) => {
+    fpsCounter.capture();
     movePlayer({
       player,
       pressedKeys,
@@ -55,6 +58,7 @@ export function renderGame(parent: HTMLElement) {
         },
       },
     ]);
+    renderFps(canvasCtx, fpsCounter.fps());
   });
 }
 
@@ -68,4 +72,10 @@ function renderInOrder(sprites: SortableSprite[]) {
     .slice()
     .sort((s1, s2) => s1.ordinal - s2.ordinal)
     .forEach((s) => s.render());
+}
+
+function renderFps(canvasCtx: CanvasRenderingContext2D, fps: number) {
+  canvasCtx.font = '48px sans';
+  canvasCtx.textBaseline = 'top';
+  canvasCtx.fillText(fps.toFixed(1), 10, 10);
 }

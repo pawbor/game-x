@@ -3,7 +3,7 @@ import { TileSize } from '../tile';
 import { parseTileMap } from '../tile/parseTileMap';
 import { Tile } from '../tile/Tile';
 import { Grass } from './Grass';
-import grassMap from './grass.csv';
+import grassMap from './assets/grass.csv';
 import { grassHitBox } from './grassHitBox';
 
 export function initGrass() {
@@ -15,5 +15,5 @@ export function initGrass() {
 function createGrass(tile: Tile): Grass {
   const position = scale(tile.position, TileSize);
   const hitBox = grassHitBox(position);
-  return { position, hitBox };
+  return { position, hitBox, tileId: tile.tileId };
 }

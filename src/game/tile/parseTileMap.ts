@@ -9,5 +9,5 @@ export function parseTileMap(tileMap: TileMap): Tile[] {
       })
     )
     .flat(1)
-    .filter((char) => char.tileId !== '-1');
+    .filter((char) => char.tileId && char.tileId !== '-1');
 }

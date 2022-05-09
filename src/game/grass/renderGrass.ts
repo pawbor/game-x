@@ -1,5 +1,8 @@
 import { Camera, transformPosition } from '../camera';
-import { TileSize } from '../tile';
+import { getImage } from '../imageCache';
+import grass1Src from './assets/grass1.png';
+import grass2Src from './assets/grass2.png';
+import grass3Src from './assets/grass3.png';
 import { Grass } from './Grass';
 
 export function renderGrass(props: {
@@ -8,8 +11,21 @@ export function renderGrass(props: {
   grass: Grass;
 }) {
   const { canvasCtx, camera, grass } = props;
-  const { position } = grass;
+  const { position, tileId } = grass;
   const [x, y] = transformPosition({ position, canvasCtx, camera });
-  canvasCtx.fillStyle = 'green';
-  canvasCtx.fillRect(x, y, TileSize, TileSize);
+  const img = getImage({ src: selectGrass(tileId) });
+  canvasCtx.drawImage(img, x, y);
+}
+
+function selectGrass(tileId: string) {
+  switch (tileId) {
+    case '8':
+      return grass1Src;
+    case '9':
+      return grass2Src;
+    case '10':
+      return grass3Src;
+    default:
+      throw new Error(`Unsupported grass tile: ${tileId}`);
+  }
 }

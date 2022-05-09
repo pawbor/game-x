@@ -1,6 +1,7 @@
 import { Camera, transformPosition } from '../camera';
-import { TileSize } from '../tile';
-import { Player } from './Player';
+import { getImage } from '../imageCache';
+import { playerSprites } from './assets';
+import { Player, PlayerState } from './Player';
 
 export function renderPlayer(props: {
   canvasCtx: CanvasRenderingContext2D;
@@ -10,6 +11,14 @@ export function renderPlayer(props: {
   const { canvasCtx, camera, player } = props;
   const { position } = player;
   const [x, y] = transformPosition({ position, canvasCtx, camera });
-  canvasCtx.fillStyle = 'blue';
-  canvasCtx.fillRect(x, y, TileSize, TileSize);
+  const img = getImage({ src: selectSprite(player) });
+  canvasCtx.drawImage(img, x, y);
+}
+
+function selectSprite(player: Player): string {
+  if (player.state === PlayerState.Walk) {
+    const x = Math.floor(performance.now() / 200) % 4;
+    return playerSprites[player.state][player.spriteDirection][x];
+  }
+  return playerSprites[player.state][player.spriteDirection];
 }

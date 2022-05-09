@@ -22,6 +22,7 @@ export function gameLoop(renderGameFrame: GameFrameRenderer) {
     const elapsedTime = time - startTime;
     const framesTimeDiff = time - prevFrameTime;
     prevFrameTime = time;
+
     renderGameFrame({
       startTime,
       prevFrameTime,
@@ -29,6 +30,7 @@ export function gameLoop(renderGameFrame: GameFrameRenderer) {
       elapsedTime,
       framesTimeDiff,
     });
+
     requestAnimationFrame(render);
   }
 }
