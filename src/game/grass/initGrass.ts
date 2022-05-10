@@ -1,9 +1,8 @@
 import { scale } from '../../vector2d';
-import { TileSize } from '../tile';
-import { parseTileMap } from '../tile/parseTileMap';
-import { Tile } from '../tile/Tile';
-import { Grass } from './Grass';
+import { Tile, TileSize } from '../tile';
+import { parseTileMap } from '../tileMap';
 import grassMap from './assets/grass.csv';
+import { Grass } from './Grass';
 import { grassHitBox } from './grassHitBox';
 
 export function initGrass() {

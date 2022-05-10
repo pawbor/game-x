@@ -1,9 +1,10 @@
 import { magnitude, normalize, scale, sum, Vector2d } from '../../vector2d';
+import { CharacterState } from '../character';
 import { GameLoopContext } from '../gameLoop';
 import { HitBox } from '../hitBox';
+import { SpriteDirection } from '../sprite/SpriteDirection';
 import { avoidCollision } from './avoidCollision';
-import { Player, PlayerState, SpriteDirection } from './Player';
-import { playerHitBox } from './playerHitBox';
+import { Player, updatePosition } from './Player';
 
 const speed = 0.5;
 
@@ -52,15 +53,14 @@ function calcDirection(pressedKeys: Record<string, boolean>) {
 
 function updatePlayer(props: { player: Player; move: Vector2d }) {
   const { player, move } = props;
-  player.position = sum(player.position, move);
-  player.hitBox = playerHitBox(player.position);
-  player.state = calcPlayerState(move);
+  updatePosition({ player, position: sum(player.position, move) });
+  player.state = calcCharacterState(move);
   player.spriteDirection = calcSpriteDirection(move);
 }
 
-function calcPlayerState(move: Vector2d) {
+function calcCharacterState(move: Vector2d) {
   const distance = magnitude(move);
-  return distance === 0 ? PlayerState.Idle : PlayerState.Walk;
+  return distance === 0 ? CharacterState.Idle : CharacterState.Walk;
 }
 
 function calcSpriteDirection(move: Vector2d): SpriteDirection {

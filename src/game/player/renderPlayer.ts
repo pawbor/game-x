@@ -1,7 +1,8 @@
 import { Camera, transformPosition } from '../camera';
+import { CharacterState } from '../character';
 import { getImage } from '../imageCache';
 import { playerSprites } from './assets';
-import { Player, PlayerState } from './Player';
+import { Player } from './Player';
 
 export function renderPlayer(props: {
   canvasCtx: CanvasRenderingContext2D;
@@ -16,7 +17,7 @@ export function renderPlayer(props: {
 }
 
 function selectSprite(player: Player): string {
-  if (player.state === PlayerState.Walk) {
+  if (player.state === CharacterState.Walk) {
     const x = Math.floor(performance.now() / 200) % 4;
     return playerSprites[player.state][player.spriteDirection][x];
   }

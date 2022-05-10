@@ -1,7 +1,7 @@
 import { scale } from '../../vector2d';
 import { TileSize } from '../tile';
-import { parseTileMap } from '../tile/parseTileMap';
-import { Tile } from '../tile/Tile';
+import { parseTileMap } from '../tileMap';
+import { Tile } from '../tile';
 import boundariesMap from './boundaries.csv';
 import { Boundary } from './Boundary';
 import { boundaryHitBox } from './boundaryHitBox';

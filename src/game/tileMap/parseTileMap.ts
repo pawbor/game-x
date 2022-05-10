@@ -1,4 +1,4 @@
-import { Tile } from './Tile';
+import { Tile } from '../tile';
 import { TileMap } from './TileMap';
 
 export function parseTileMap(tileMap: TileMap): Tile[] {

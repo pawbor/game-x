@@ -26,3 +26,5 @@ export function createFpsCounter() {
     },
   };
 }
+
+export type FpsCounter = ReturnType<typeof createFpsCounter>;

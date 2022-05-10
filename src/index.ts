@@ -1,4 +1,4 @@
-import { renderGame } from './game';
+import { runGame } from './game';
 
 bootstrapApp();
 
@@ -9,5 +9,5 @@ function bootstrapApp() {
   body.style.margin = '0';
   body.style.position = 'fixed';
 
-  renderGame(body);
+  runGame(body);
 }

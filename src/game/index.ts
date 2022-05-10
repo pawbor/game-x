@@ -1,1 +1,1 @@
-export * from './renderGame';
+export * from './runGame';

@@ -1,7 +1,7 @@
+import { create } from '.';
 import { scale } from '../../vector2d';
-import { create } from '../player';
-import { TileSize } from '../tile';
-import { Tile } from '../tile/Tile';
+import { Tile, TileSize } from '../tile';
+import { updatePosition } from './Player';
 
 export function initPlayer(charTiles: Tile[]) {
   const playerTile = charTiles.find((c) => c.tileId === '394');
@@ -9,6 +9,6 @@ export function initPlayer(charTiles: Tile[]) {
     throw new Error('Player position not configured');
   }
   const player = create();
-  player.position = scale(playerTile.position, TileSize);
+  updatePosition({ player, position: scale(playerTile.position, TileSize) });
   return player;
 }
