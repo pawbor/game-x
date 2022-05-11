@@ -1,16 +1,9 @@
 import { forceNonNullable } from '../../assertions';
+import { sum } from '../../vector2d';
 import { Camera, transformPosition } from '../camera';
 import { getImage } from '../imageCache';
-import { sprites } from './sprites';
 import { Enemy } from './Enemy';
-import { EnemyType } from './EnemyType';
-
-const imageOffsets: Record<EnemyType, number> = {
-  [EnemyType.Bamboo]: 0,
-  [EnemyType.Spirit]: 0,
-  [EnemyType.Raccoon]: -150,
-  [EnemyType.Squid]: 0,
-};
+import { selectEnemySprites, selectSpriteOffset } from './sprites';
 
 export function renderEnemy(props: {
   canvasCtx: CanvasRenderingContext2D;
@@ -19,13 +12,18 @@ export function renderEnemy(props: {
 }) {
   const { canvasCtx, camera, enemy } = props;
   const { position } = enemy;
-  const [x, y] = transformPosition({ position, canvasCtx, camera });
+  const spriteOffset = selectSpriteOffset(enemy);
+  const [x, y] = transformPosition({
+    position: sum(position, spriteOffset),
+    canvasCtx,
+    camera,
+  });
   const img = getImage({ src: selectSprite(enemy) });
-  canvasCtx.drawImage(img, x, y + imageOffsets[enemy.type]);
+  canvasCtx.drawImage(img, x, y);
 }
 
 function selectSprite(enemy: Enemy): string {
-  const frames = sprites[enemy.type][enemy.state];
+  const frames = selectEnemySprites(enemy);
   const x = Math.floor(performance.now() / 200) % frames.length;
   return forceNonNullable(frames[x], `Missing frame ${x}`);
 }
