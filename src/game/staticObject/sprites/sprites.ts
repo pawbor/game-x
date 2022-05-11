@@ -30,7 +30,7 @@ export interface Sprite {
 }
 
 const sprites: Sprite[] = [
-  { src: so01, imgOffset: oneUp(), hitBox: treeHitBox() },
+  { src: so01, imgOffset: oneUp(), hitBox: stumpHitBox() },
   { src: so02, imgOffset: oneUp(), hitBox: treeHitBox() },
   { src: so03, imgOffset: oneUp(), hitBox: treeHitBox() },
   { src: so04, imgOffset: oneUp(), hitBox: treeHitBox() },
@@ -65,6 +65,10 @@ function oneUp(): Vector2d {
 
 function statueHitBox() {
   return create({ left: 0, top: 0, width: TileSize, height: TileSize });
+}
+
+function stumpHitBox() {
+  return create({ left: 0, top: -30, width: TileSize * 2, height: TileSize });
 }
 
 function treeHitBox() {
