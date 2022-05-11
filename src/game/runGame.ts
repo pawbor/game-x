@@ -22,7 +22,7 @@ export function runGame(parent: HTMLElement) {
   }
   const { pressedKeys } = keyboard();
   const camera = mCamera.create();
-  const { player, boundaries, grass, enemies } = loadMapData();
+  const { player, boundaries, grass, enemies, staticObjects } = loadMapData();
   const fpsCounter = createFpsCounter();
 
   gameLoop((loopCtx) => {
@@ -35,6 +35,7 @@ export function runGame(parent: HTMLElement) {
         ...enemies.map((x) => x.hitBox),
         ...boundaries.map((x) => x.hitBox),
         ...grass.map((x) => x.hitBox),
+        ...staticObjects.map((x) => x.hitBox),
       ],
     });
     mCamera.followPlayer({ player, camera });
@@ -42,7 +43,7 @@ export function runGame(parent: HTMLElement) {
       camera,
       canvasCtx,
       fpsCounter,
-      world: { player, boundaries, enemies, grass },
+      world: { player, boundaries, enemies, grass, staticObjects },
     });
   });
 }

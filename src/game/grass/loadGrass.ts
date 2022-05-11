@@ -1,11 +1,11 @@
 import { scale } from '../../vector2d';
 import { Tile, TileSize } from '../tile';
 import { parseTileMap } from '../tileMap';
-import grassMap from './assets/grass.csv';
 import { Grass } from './Grass';
+import grassMap from './grass.csv';
 import { grassHitBox } from './grassHitBox';
 
-export function initGrass() {
+export function loadGrass() {
   const tiles = parseTileMap(grassMap);
   const grass = tiles.map(createGrass);
   return { grass };

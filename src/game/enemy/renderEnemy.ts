@@ -1,7 +1,7 @@
 import { forceNonNullable } from '../../assertions';
 import { Camera, transformPosition } from '../camera';
 import { getImage } from '../imageCache';
-import { enemySprites } from './assets';
+import { sprites } from './sprites';
 import { Enemy } from './Enemy';
 import { EnemyType } from './EnemyType';
 
@@ -25,7 +25,7 @@ export function renderEnemy(props: {
 }
 
 function selectSprite(enemy: Enemy): string {
-  const frames = enemySprites[enemy.type][enemy.state];
+  const frames = sprites[enemy.type][enemy.state];
   const x = Math.floor(performance.now() / 200) % frames.length;
   return forceNonNullable(frames[x], `Missing frame ${x}`);
 }

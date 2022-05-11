@@ -31,7 +31,6 @@ const hitBoxtemplates: Record<EnemyType, HitBox> = {
 };
 
 export function enemyHitBox(props: { type: EnemyType; position: Vector2d }) {
-  console.log('enemyHitBox', props);
   const { type, position } = props;
   const { left, top, width, height } = hitBoxtemplates[type];
   return create({

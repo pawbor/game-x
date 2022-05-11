@@ -1,10 +1,11 @@
-import { Camera } from '../camera';
-import { Enemy } from '../enemy';
-import { renderEnemy } from '../enemy/renderEnemy';
+import { Camera, transformPosition } from '../camera';
+import { Enemy, renderEnemy } from '../enemy';
 import { FpsCounter } from '../fps';
 import { Grass, renderGrass } from '../grass';
 import { renderGround } from '../ground';
+import { HitBox } from '../hitBox';
 import { renderPlayer } from '../player';
+import { renderStaticObject, StaticObject } from '../staticObjects';
 import { World } from './World';
 
 export function renderWorld(props: {
@@ -14,19 +15,25 @@ export function renderWorld(props: {
   fpsCounter: FpsCounter;
 }) {
   const { canvasCtx, camera, world, fpsCounter } = props;
-  const { player, grass, enemies } = world;
+  const { player, grass, enemies, staticObjects } = world;
   const { canvas } = canvasCtx;
 
   canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
   renderGround({ canvasCtx, camera });
-  renderInOrder([
-    ...grass.map(grassSprite),
-    ...enemies.map(enemySprite),
-    playerSprite(),
+  ySortRender([
+    ...grass.map(grassRenderer),
+    ...enemies.map(enemyRenderer),
+    ...staticObjects.map(staticObjectRenderer),
+    playerRenderer(),
   ]);
   renderFps(canvasCtx, fpsCounter.fps());
+  renderHitBoxes({
+    canvasCtx,
+    camera,
+    items: [player, ...grass, ...enemies, ...staticObjects],
+  });
 
-  function grassSprite(x: Grass): SortableSprite {
+  function grassRenderer(x: Grass): YSortRenderer {
     return {
       ordinal: x.position[1],
       render() {
@@ -35,7 +42,7 @@ export function renderWorld(props: {
     };
   }
 
-  function enemySprite(enemy: Enemy): SortableSprite {
+  function enemyRenderer(enemy: Enemy): YSortRenderer {
     return {
       ordinal: enemy.position[1],
       render() {
@@ -44,7 +51,16 @@ export function renderWorld(props: {
     };
   }
 
-  function playerSprite() {
+  function staticObjectRenderer(staticObject: StaticObject): YSortRenderer {
+    return {
+      ordinal: staticObject.position[1],
+      render() {
+        renderStaticObject({ canvasCtx, camera, staticObject });
+      },
+    };
+  }
+
+  function playerRenderer() {
     return {
       ordinal: player.position[1],
       render() {
@@ -54,12 +70,12 @@ export function renderWorld(props: {
   }
 }
 
-interface SortableSprite {
+interface YSortRenderer {
   ordinal: number;
   render(): void;
 }
 
-function renderInOrder(sprites: SortableSprite[]) {
+function ySortRender(sprites: YSortRenderer[]) {
   sprites
     .slice()
     .sort((s1, s2) => s1.ordinal - s2.ordinal)
@@ -70,4 +86,23 @@ function renderFps(canvasCtx: CanvasRenderingContext2D, fps: number) {
   canvasCtx.font = '48px sans';
   canvasCtx.textBaseline = 'top';
   canvasCtx.fillText(fps.toFixed(1), 10, 10);
+}
+
+function renderHitBoxes(props: {
+  canvasCtx: CanvasRenderingContext2D;
+  camera: Camera;
+  items: Array<{ hitBox: HitBox }>;
+}) {
+  const { canvasCtx, camera, items } = props;
+  items
+    .map((item) => item.hitBox)
+    .forEach((box) => {
+      const { left, top, width, height } = box;
+      const [x, y] = transformPosition({
+        position: [left, top],
+        camera,
+        canvasCtx,
+      });
+      canvasCtx.strokeRect(x, y, width, height);
+    });
 }

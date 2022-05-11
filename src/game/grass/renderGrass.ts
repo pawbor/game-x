@@ -1,9 +1,7 @@
 import { Camera, transformPosition } from '../camera';
 import { getImage } from '../imageCache';
-import grass1Src from './assets/grass1.png';
-import grass2Src from './assets/grass2.png';
-import grass3Src from './assets/grass3.png';
 import { Grass } from './Grass';
+import { sprites } from './sprites';
 
 export function renderGrass(props: {
   canvasCtx: CanvasRenderingContext2D;
@@ -20,11 +18,11 @@ export function renderGrass(props: {
 function selectGrass(tileId: string) {
   switch (tileId) {
     case '8':
-      return grass1Src;
+      return sprites.grass1;
     case '9':
-      return grass2Src;
+      return sprites.grass2;
     case '10':
-      return grass3Src;
+      return sprites.grass3;
     default:
       throw new Error(`Unsupported grass tile: ${tileId}`);
   }

@@ -2,9 +2,9 @@ import { magnitude, normalize, scale, sum, Vector2d } from '../../vector2d';
 import { CharacterState } from '../character';
 import { GameLoopContext } from '../gameLoop';
 import { HitBox } from '../hitBox';
-import { SpriteDirection } from '../sprite/SpriteDirection';
 import { avoidCollision } from './avoidCollision';
 import { Player, updatePosition } from './Player';
+import { SpriteDirection } from './SpriteDirection';
 
 const speed = 0.5;
 

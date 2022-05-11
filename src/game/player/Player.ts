@@ -1,7 +1,7 @@
 import { Vector2d } from '../../vector2d';
 import { CharacterState } from '../character';
 import { HitBox } from '../hitBox';
-import { SpriteDirection } from '../sprite';
+import { SpriteDirection } from './SpriteDirection';
 import { playerHitBox } from './playerHitBox';
 
 export interface Player {
