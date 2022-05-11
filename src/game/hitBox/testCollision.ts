@@ -1,4 +1,4 @@
-import { HitBox } from '.';
+import { HitBox } from './HitBox';
 
 export function testCollision(b1: HitBox, b2: HitBox) {
   return testXDist(b1, b2) && testYDist(b1, b2);

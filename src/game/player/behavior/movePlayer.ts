@@ -1,11 +1,11 @@
-import { magnitude, normalize, scale, sum, Vector2d } from '../../vector2d';
-import { CharacterState } from '../character';
-import { GameLoopContext } from '../gameLoop';
-import { HitBox } from '../hitBox';
-import { KeyboardState } from '../keyboard';
+import { magnitude, normalize, scale, sum, Vector2d } from '../../../vector2d';
+import { CharacterState } from '../../character';
+import { GameLoopContext } from '../../gameLoop';
+import { HitBox } from '../../hitBox';
+import { KeyboardState } from '../../keyboard';
 import { avoidCollision } from './avoidCollision';
-import { Player, updatePosition } from './Player';
-import { SpriteDirection } from './SpriteDirection';
+import { Player, updatePosition } from '../models';
+import { SpriteDirection } from '../models/SpriteDirection';
 
 const speed = 0.5;
 

@@ -1,7 +1,7 @@
 import { Enemy } from '../enemy';
 import { Grass } from '../grass';
 import { Boundary } from '../ground';
-import { Player } from '../player';
+import { Player } from '../player/models';
 import { StaticObject } from '../staticObjects';
 
 export interface World {
@@ -9,5 +9,5 @@ export interface World {
   enemies: Enemy[];
   boundaries: Boundary[];
   grass: Grass[];
-  staticObjects: StaticObject[]
+  staticObjects: StaticObject[];
 }

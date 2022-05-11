@@ -1,6 +1,7 @@
-import { Vector2d } from '../../vector2d';
-import { create } from '../hitBox';
-import { TileSize } from '../tile';
+import { Vector2d } from '../../../vector2d';
+import { create } from '../../hitBox';
+import { TileSize } from '../../tile';
+
 
 export function playerHitBox(position: Vector2d) {
   const topOffset = 25;

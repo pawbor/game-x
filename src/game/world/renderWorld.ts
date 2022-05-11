@@ -4,7 +4,7 @@ import { FpsCounter } from '../fps';
 import { Grass, renderGrass } from '../grass';
 import { renderGround } from '../ground';
 import { HitBox } from '../hitBox';
-import { renderPlayer } from '../player';
+import { renderPlayer } from '../player/rendering';
 import { renderStaticObject, StaticObject } from '../staticObjects';
 import { World } from './World';
 

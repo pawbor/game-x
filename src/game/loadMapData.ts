@@ -2,7 +2,7 @@ import { loadCharacterTiles } from './character';
 import { initEnemies } from './enemy';
 import { loadGrass } from './grass';
 import { loadBoundaries } from './ground';
-import { initPlayer } from './player';
+import { initPlayer } from './player/initialization';
 import { loadStaticObjects } from './staticObjects';
 
 export function loadMapData() {

@@ -3,7 +3,7 @@ import { createFpsCounter } from './fps';
 import { gameLoop } from './gameLoop';
 import { listenKeyboard } from './keyboard';
 import { loadMapData } from './loadMapData';
-import { movePlayer } from './player';
+import { movePlayer } from './player/behavior';
 import { renderWorld } from './world';
 
 export function runGame(parent: HTMLElement) {

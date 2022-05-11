@@ -1,5 +1,5 @@
-import { Tile } from '../tile';
-import { create, updatePosition } from './Player';
+import { Tile } from '../../tile';
+import { create, updatePosition } from '../models';
 
 export function initPlayer(charTiles: Tile[]) {
   const playerTile = charTiles.find((c) => c.tileId === '394');
