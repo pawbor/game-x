@@ -3,7 +3,7 @@ import { initEnemies } from './enemy/initialization';
 import { loadGrass } from './grass/initialization';
 import { loadBoundaries } from './ground';
 import { initPlayer } from './player/initialization';
-import { loadStaticObjects } from './staticObjects';
+import { loadStaticObjects } from './staticObject/initialization';
 
 export function loadMapData() {
   const characterTiles = loadCharacterTiles();

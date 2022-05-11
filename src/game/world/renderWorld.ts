@@ -7,7 +7,8 @@ import { renderGrass } from '../grass/rendering';
 import { renderGround } from '../ground';
 import { HitBox } from '../hitBox';
 import { renderPlayer } from '../player/rendering';
-import { renderStaticObject, StaticObject } from '../staticObjects';
+import { StaticObject } from '../staticObject/models';
+import { renderStaticObject } from '../staticObject/rendering';
 import { World } from './World';
 
 export function renderWorld(props: {

@@ -1,7 +1,7 @@
-import { Tile } from '../tile';
-import { parseTileMap } from '../tileMap';
-import { StaticObject } from './StaticObject';
-import { staticObjectHitBox } from './staticObjectHitBox';
+import { Tile } from '../../tile';
+import { parseTileMap } from '../../tileMap';
+import { StaticObject } from '../models';
+import { staticObjectHitBox } from '../sprites';
 import objectsMap from './staticObjects.csv';
 
 export function loadStaticObjects() {
