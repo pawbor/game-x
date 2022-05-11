@@ -1,5 +1,6 @@
 import { Camera, transformPosition } from '../camera';
-import { Enemy, renderEnemy } from '../enemy';
+import { Enemy } from '../enemy/models';
+import { renderEnemy } from '../enemy/rendering';
 import { FpsCounter } from '../fps';
 import { Grass, renderGrass } from '../grass';
 import { renderGround } from '../ground';

@@ -1,4 +1,4 @@
-import { Enemy } from '../enemy';
+import { Enemy } from '../enemy/models';
 import { Grass } from '../grass';
 import { Boundary } from '../ground';
 import { Player } from '../player/models';

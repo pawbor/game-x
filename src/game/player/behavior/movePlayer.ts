@@ -3,9 +3,9 @@ import { CharacterState } from '../../character';
 import { GameLoopContext } from '../../gameLoop';
 import { HitBox } from '../../hitBox';
 import { KeyboardState } from '../../keyboard';
+import { Player, SpriteDirection } from '../models';
+import { playerHitBox } from '../sprites';
 import { avoidCollision } from './avoidCollision';
-import { Player, updatePosition } from '../models';
-import { SpriteDirection } from '../models/SpriteDirection';
 
 const speed = 0.5;
 
@@ -62,7 +62,9 @@ function calcDirection(keyboardState: KeyboardState) {
 
 function updatePlayer(props: { player: Player; move: Vector2d }) {
   const { player, move } = props;
-  updatePosition({ player, position: sum(player.position, move) });
+
+  player.position = sum(player.position, move);
+  player.hitBox = playerHitBox(player.position);
   player.state = calcCharacterState(move);
   player.spriteDirection = calcSpriteDirection(move);
 }

@@ -1,11 +1,11 @@
 import { Vector2d } from '../../../vector2d';
 import { CharacterState } from '../../character';
 import { HitBox } from '../../hitBox';
-import { SpriteDirection } from './SpriteDirection';
+import { EnemyType } from './EnemyType';
 
-export interface Player {
+export interface Enemy {
+  type: EnemyType;
   position: Vector2d;
   hitBox: HitBox;
   state: CharacterState;
-  spriteDirection: SpriteDirection;
 }

@@ -1,6 +1,7 @@
-import { Tile } from '../tile';
-import { create, Enemy, updatePosition } from './Enemy';
-import { EnemyType } from './EnemyType';
+import { CharacterState } from '../../character';
+import { Tile } from '../../tile';
+import { Enemy, EnemyType } from '../models';
+import { enemyHitBox } from '../sprites';
 
 const tileMapping: Record<string, EnemyType> = {
   '390': EnemyType.Bamboo,
@@ -14,12 +15,16 @@ export function initEnemies(charTiles: Tile[]): Enemy[] {
     .map((tile) => {
       const type = tileMapping[tile.tileId];
       if (!type) return null;
-      const enemy = create(type);
-      updatePosition({
-        enemy,
-        position: tile.position,
-      });
-      return enemy;
+
+      const { position } = tile;
+      const hitBox = enemyHitBox({ type, position });
+
+      return {
+        type,
+        position,
+        hitBox,
+        state: CharacterState.Idle,
+      };
     })
     .filter((enemy): enemy is Enemy => enemy !== null);
 }

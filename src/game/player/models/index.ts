@@ -1,2 +1,2 @@
 export * from './Player';
-export * from './playerHitBox';
+export * from './SpriteDirection';
