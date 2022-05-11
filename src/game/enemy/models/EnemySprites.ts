@@ -1,6 +1,6 @@
-import { Vector2d } from '../../../vector2d';
-import { CharacterState } from '../../character';
-import { HitBox } from '../../hitBox';
+import { CharacterState } from '@/game/character';
+import { HitBox } from '@/game/hitBox';
+import { Vector2d } from '@/vector2d';
 
 export type StateSprites = string[];
 

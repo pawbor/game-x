@@ -1,5 +1,5 @@
-import { Vector2d } from '../../../vector2d';
-import { create } from '../../hitBox';
+import { create } from '@/game/hitBox';
+import { Vector2d } from '@/vector2d';
 import { selectSprite } from './sprites';
 
 export function staticObjectHitBox(props: {

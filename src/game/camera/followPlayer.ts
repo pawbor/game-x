@@ -1,4 +1,4 @@
-import { Player } from '../player/models';
+import { Player } from '@/game/player/models';
 import { Camera } from './Camera';
 
 export function followPlayer(props: { player: Player; camera: Camera }) {

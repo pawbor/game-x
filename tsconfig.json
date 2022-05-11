@@ -3,6 +3,10 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "target": "ES2020",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     /* Interop Constraints */
     "isolatedModules": true,
     "esModuleInterop": true,

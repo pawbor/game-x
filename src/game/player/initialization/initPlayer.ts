@@ -1,7 +1,7 @@
-import { CharacterState } from '../../character';
-import { Tile } from '../../tile';
-import { Player, SpriteDirection } from '../models';
-import { playerHitBox } from '../sprites';
+import { CharacterState } from '@/game/character';
+import { Player, SpriteDirection } from '@/game/player/models';
+import { playerHitBox } from '@/game/player/sprites';
+import { Tile } from '@/game/tile';
 
 export function initPlayer(charTiles: Tile[]): Player {
   const playerTile = charTiles.find((c) => c.tileId === '394');

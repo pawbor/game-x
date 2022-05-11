@@ -1,9 +1,9 @@
-import { forceNonNullable } from '../../../assertions';
-import { Camera, transformPosition } from '../../camera';
-import { CharacterState } from '../../character';
-import { getImage } from '../../imageCache';
-import { Player } from '../models';
-import { sprites } from '../sprites';
+import { forceNonNullable } from '@/assertions';
+import { Camera, transformPosition } from '@/game/camera';
+import { CharacterState } from '@/game/character';
+import { getImage } from '@/game/imageCache';
+import { Player } from '@/game/player/models';
+import { sprites } from '@/game/player/sprites';
 
 export function renderPlayer(props: {
   canvasCtx: CanvasRenderingContext2D;

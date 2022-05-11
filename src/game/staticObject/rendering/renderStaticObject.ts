@@ -1,8 +1,8 @@
-import { sum } from '../../../vector2d';
-import { Camera, transformPosition } from '../../camera';
-import { getImage } from '../../imageCache';
-import { selectSprite } from '../sprites';
-import { StaticObject } from '../models';
+import { Camera, transformPosition } from '@/game/camera';
+import { getImage } from '@/game/imageCache';
+import { StaticObject } from '@/game/staticObject/models';
+import { selectSprite } from '@/game/staticObject/sprites';
+import { sum } from '@/vector2d';
 
 export function renderStaticObject(props: {
   canvasCtx: CanvasRenderingContext2D;

@@ -1,6 +1,6 @@
-import { Vector2d } from '../../../vector2d';
-import { create } from '../../hitBox';
-import { EnemyType } from '../models';
+import { EnemyType } from '@/game/enemy/models';
+import { create } from '@/game/hitBox';
+import { Vector2d } from '@/vector2d';
 import { selectSpriteHitBox } from './sprites';
 
 export function enemyHitBox(props: { type: EnemyType; position: Vector2d }) {

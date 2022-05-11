@@ -1,7 +1,7 @@
-import { Camera, transformPosition } from '../../camera';
-import { getImage } from '../../imageCache';
-import { Grass } from '../models';
-import { sprites } from '../sprites';
+import { Camera, transformPosition } from '@/game/camera';
+import { Grass } from '@/game/grass/models';
+import { sprites } from '@/game/grass/sprites';
+import { getImage } from '@/game/imageCache';
 
 export function renderGrass(props: {
   canvasCtx: CanvasRenderingContext2D;

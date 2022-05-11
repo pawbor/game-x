@@ -4,7 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: './src/index.ts',
   resolve: {
-    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    modules: ['node_modules'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'), 
+    },
     extensions: ['.js', '.ts'],
   },
   output: {

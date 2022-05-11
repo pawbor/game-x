@@ -1,7 +1,7 @@
-import { Vector2d } from '../../../vector2d';
-import { HitBox, testCollision } from '../../hitBox';
-import { Player } from '../models';
-import { playerHitBox } from '../sprites';
+import { HitBox, testCollision } from '@/game/hitBox';
+import { Player } from '@/game/player/models';
+import { playerHitBox } from '@/game/player/sprites';
+import { Vector2d } from '@/vector2d';
 
 export function avoidCollision(props: {
   player: Player;

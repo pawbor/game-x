@@ -1,4 +1,4 @@
-import { parseTileMap } from '../tileMap';
+import { parseTileMap } from '@/game/tileMap';
 import charactersMap from './characters.csv';
 
 export function loadCharacterTiles() {

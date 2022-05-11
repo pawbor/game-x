@@ -1,6 +1,6 @@
-import { create } from '../../../hitBox';
-import { TileSize } from '../../../tile';
-import { EnemySprites } from '../EnemySprites';
+import { EnemySprites } from '@/game/enemy/models';
+import { create } from '@/game/hitBox';
+import { TileSize } from '@/game/tile';
 import { attack } from './attack';
 import { idle } from './idle';
 import { walk } from './walk';

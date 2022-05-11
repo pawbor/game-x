@@ -1,14 +1,14 @@
-import { Camera, transformPosition } from '../camera';
-import { Enemy } from '../enemy/models';
-import { renderEnemy } from '../enemy/rendering';
-import { FpsCounter } from '../fps';
-import { Grass } from '../grass/models';
-import { renderGrass } from '../grass/rendering';
-import { renderGround } from '../ground/rendering';
-import { HitBox } from '../hitBox';
-import { renderPlayer } from '../player/rendering';
-import { StaticObject } from '../staticObject/models';
-import { renderStaticObject } from '../staticObject/rendering';
+import { Camera, transformPosition } from '@/game/camera';
+import { Enemy } from '@/game/enemy/models';
+import { renderEnemy } from '@/game/enemy/rendering';
+import { FpsCounter } from '@/game/fps';
+import { Grass } from '@/game/grass/models';
+import { renderGrass } from '@/game/grass/rendering';
+import { renderGround } from '@/game/ground/rendering';
+import { HitBox } from '@/game/hitBox';
+import { renderPlayer } from '@/game/player/rendering';
+import { StaticObject } from '@/game/staticObject/models';
+import { renderStaticObject } from '@/game/staticObject/rendering';
 import { World } from './World';
 
 export function renderWorld(props: {

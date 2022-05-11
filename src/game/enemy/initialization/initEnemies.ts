@@ -1,7 +1,7 @@
-import { CharacterState } from '../../character';
-import { Tile } from '../../tile';
-import { Enemy, EnemyType } from '../models';
-import { enemyHitBox } from '../sprites';
+import { CharacterState } from '@/game/character';
+import { Enemy, EnemyType } from '@/game/enemy/models';
+import { enemyHitBox } from '@/game/enemy/sprites';
+import { Tile } from '@/game/tile';
 
 const tileMapping: Record<string, EnemyType> = {
   '390': EnemyType.Bamboo,

@@ -1,9 +1,9 @@
-import { forceNonNullable } from '../../../assertions';
-import { sum } from '../../../vector2d';
-import { Camera, transformPosition } from '../../camera';
-import { getImage } from '../../imageCache';
-import { Enemy } from '../models';
-import { selectEnemySprites, selectSpriteOffset } from '../sprites';
+import { forceNonNullable } from '@/assertions';
+import { Camera, transformPosition } from '@/game/camera';
+import { Enemy } from '@/game/enemy/models';
+import { selectEnemySprites, selectSpriteOffset } from '@/game/enemy/sprites';
+import { getImage } from '@/game/imageCache';
+import { sum } from '@/vector2d';
 
 export function renderEnemy(props: {
   canvasCtx: CanvasRenderingContext2D;

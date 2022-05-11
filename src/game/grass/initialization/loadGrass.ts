@@ -1,8 +1,8 @@
-import { Tile } from '../../tile';
-import { parseTileMap } from '../../tileMap';
-import { Grass } from '../models';
+import { Grass } from '@/game/grass/models';
+import { grassHitBox } from '@/game/grass/sprites';
+import { Tile } from '@/game/tile';
+import { parseTileMap } from '@/game/tileMap';
 import grassMap from './grass.csv';
-import { grassHitBox } from '../sprites';
 
 export function loadGrass() {
   const tiles = parseTileMap(grassMap);

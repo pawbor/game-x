@@ -1,8 +1,8 @@
-import { Enemy } from '../enemy/models';
-import { Grass } from '../grass/models';
-import { Boundary } from '../ground/models';
-import { Player } from '../player/models';
-import { StaticObject } from '../staticObject/models';
+import { Enemy } from '@/game/enemy/models';
+import { Grass } from '@/game/grass/models';
+import { Boundary } from '@/game/ground/models';
+import { Player } from '@/game/player/models';
+import { StaticObject } from '@/game/staticObject/models';
 
 export interface World {
   player: Player;
