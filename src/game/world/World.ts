@@ -1,6 +1,6 @@
 import { Enemy } from '../enemy/models';
 import { Grass } from '../grass/models';
-import { Boundary } from '../ground';
+import { Boundary } from '../ground/models';
 import { Player } from '../player/models';
 import { StaticObject } from '../staticObject/models';
 

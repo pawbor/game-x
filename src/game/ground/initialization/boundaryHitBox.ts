@@ -1,6 +1,6 @@
-import { Vector2d } from '../../vector2d';
-import { create } from '../hitBox';
-import { TileSize } from '../tile';
+import { Vector2d } from '../../../vector2d';
+import { create } from '../../hitBox';
+import { TileSize } from '../../tile';
 
 export function boundaryHitBox(position: Vector2d) {
   return create({

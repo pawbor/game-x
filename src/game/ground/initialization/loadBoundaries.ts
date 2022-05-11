@@ -1,7 +1,7 @@
-import { Tile } from '../tile';
-import { parseTileMap } from '../tileMap';
+import { Tile } from '../../tile';
+import { parseTileMap } from '../../tileMap';
 import boundariesMap from './boundaries.csv';
-import { Boundary } from './Boundary';
+import { Boundary } from '../models';
 import { boundaryHitBox } from './boundaryHitBox';
 
 export function loadBoundaries() {

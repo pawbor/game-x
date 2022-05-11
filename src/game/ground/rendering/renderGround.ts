@@ -1,5 +1,5 @@
-import { Camera, transformPosition } from '../camera';
-import { getImage } from '../imageCache';
+import { Camera, transformPosition } from '../../camera';
+import { getImage } from '../../imageCache';
 import groundSrc from './ground.png';
 
 export function renderGround(props: {

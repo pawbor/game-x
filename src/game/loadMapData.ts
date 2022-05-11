@@ -1,7 +1,7 @@
 import { loadCharacterTiles } from './character';
 import { initEnemies } from './enemy/initialization';
 import { loadGrass } from './grass/initialization';
-import { loadBoundaries } from './ground';
+import { loadBoundaries } from './ground/initialization';
 import { initPlayer } from './player/initialization';
 import { loadStaticObjects } from './staticObject/initialization';
 
