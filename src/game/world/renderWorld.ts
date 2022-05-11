@@ -26,7 +26,7 @@ export function renderWorld(props: {
     ...staticObjects.map(staticObjectRenderer),
     playerRenderer(),
   ]);
-  renderFps(canvasCtx, fpsCounter.fps());
+  renderFps({ canvasCtx, fps: fpsCounter.fps() });
   renderHitBoxes({
     canvasCtx,
     camera,
@@ -82,7 +82,11 @@ function ySortRender(sprites: YSortRenderer[]) {
     .forEach((s) => s.render());
 }
 
-function renderFps(canvasCtx: CanvasRenderingContext2D, fps: number) {
+function renderFps(props: {
+  canvasCtx: CanvasRenderingContext2D;
+  fps: number;
+}) {
+  const { canvasCtx, fps } = props;
   canvasCtx.font = '48px sans';
   canvasCtx.textBaseline = 'top';
   canvasCtx.fillText(fps.toFixed(1), 10, 10);

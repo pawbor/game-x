@@ -1,5 +1,4 @@
-import { scale } from '../../vector2d';
-import { Tile, TileSize } from '../tile';
+import { Tile } from '../tile';
 import { create, Enemy, updatePosition } from './Enemy';
 import { EnemyType } from './EnemyType';
 
@@ -18,7 +17,7 @@ export function initEnemies(charTiles: Tile[]): Enemy[] {
       const enemy = create(type);
       updatePosition({
         enemy,
-        position: scale(tile.position, TileSize),
+        position: tile.position,
       });
       return enemy;
     })

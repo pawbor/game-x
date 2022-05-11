@@ -3,6 +3,7 @@ import { Camera } from './Camera';
 
 export function followPlayer(props: { player: Player; camera: Camera }) {
   const { player, camera } = props;
-  camera.center[0] = player.position[0];
-  camera.center[1] = player.position[1];
+  const [x, y] = player.position;
+  camera.center[0] = x;
+  camera.center[1] = y;
 }

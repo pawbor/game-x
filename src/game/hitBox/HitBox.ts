@@ -20,26 +20,26 @@ export function create(props: CreateProps): HitBox {
   }
 
   return fromTopLeft(props);
+}
 
-  function fromCenter(props: Center): HitBox {
-    const { width, height, center } = props;
-    return {
-      left: center[0] - width / 2,
-      right: center[0] + width / 2,
-      top: center[1] - height / 2,
-      bottom: center[1] + height / 2,
-      width,
-      height,
-      center,
-    };
-  }
+function fromCenter(props: Center): HitBox {
+  const { width, height, center } = props;
+  return {
+    left: center[0] - width / 2,
+    right: center[0] + width / 2,
+    top: center[1] - height / 2,
+    bottom: center[1] + height / 2,
+    width,
+    height,
+    center,
+  };
+}
 
-  function fromTopLeft(props: TLCorner): HitBox {
-    const { width, height, top, left } = props;
-    return fromCenter({
-      width,
-      height,
-      center: [left + width / 2, top + height / 2],
-    });
-  }
+function fromTopLeft(props: TLCorner): HitBox {
+  const { width, height, top, left } = props;
+  return fromCenter({
+    width,
+    height,
+    center: [left + width / 2, top + height / 2],
+  });
 }

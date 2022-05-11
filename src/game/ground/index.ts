@@ -1,3 +1,3 @@
 export * from './Boundary';
-export * from './initBoundaries';
+export * from './loadBoundaries';
 export * from './renderGround';

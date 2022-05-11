@@ -1,5 +1,4 @@
-import { scale } from '../../vector2d';
-import { Tile, TileSize } from '../tile';
+import { Tile } from '../tile';
 import { parseTileMap } from '../tileMap';
 import { StaticObject } from './StaticObject';
 import { staticObjectHitBox } from './staticObjectHitBox';
@@ -11,8 +10,7 @@ export function loadStaticObjects() {
 }
 
 function createStaticObject(tile: Tile): StaticObject {
-  const position = scale(tile.position, TileSize);
-  const { tileId } = tile;
+  const { tileId, position } = tile;
   const hitBox = staticObjectHitBox({ tileId, position });
   return { position, hitBox, tileId };
 }

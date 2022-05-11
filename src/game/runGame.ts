@@ -1,7 +1,7 @@
 import * as mCamera from './camera';
 import { createFpsCounter } from './fps';
 import { gameLoop } from './gameLoop';
-import { keyboard } from './keyboard';
+import { listenKeyboard } from './keyboard';
 import { loadMapData } from './loadMapData';
 import { movePlayer } from './player';
 import { renderWorld } from './world';
@@ -20,7 +20,7 @@ export function runGame(parent: HTMLElement) {
   if (!canvasCtx) {
     throw new Error('Canvas not supported');
   }
-  const { pressedKeys } = keyboard();
+  const keyboardState = listenKeyboard();
   const camera = mCamera.create();
   const { player, boundaries, grass, enemies, staticObjects } = loadMapData();
   const fpsCounter = createFpsCounter();
@@ -29,7 +29,7 @@ export function runGame(parent: HTMLElement) {
     fpsCounter.capture();
     movePlayer({
       player,
-      pressedKeys,
+      keyboardState,
       loopCtx,
       obstacles: [
         ...enemies.map((x) => x.hitBox),

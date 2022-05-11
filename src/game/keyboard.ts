@@ -1,5 +1,11 @@
-export function keyboard() {
-  const pressedKeys: Record<string, boolean> = {};
+export type PressedKeys = Record<string, boolean>;
+
+export interface KeyboardState {
+  pressedKeys: PressedKeys;
+}
+
+export function listenKeyboard(): KeyboardState {
+  const pressedKeys: PressedKeys = {};
 
   document.addEventListener('keydown', (event) => {
     pressedKeys[event.key] = true;

@@ -1,0 +1,45 @@
+{
+  "extends": [
+    "airbnb-base",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "max-classes-per-file": "off",
+    "no-console": "error",
+    "import/extensions": [
+      "error",
+      {
+        "ts": "never",
+        "json": "always"
+      }
+    ],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "no-useless-constructor": "off",
+    "@typescript-eslint/no-useless-constructor": "error",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": [
+      "error",
+      { "functions": false, "typedefs": false }
+    ],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
+    "import/prefer-default-export": "off",
+    "import/no-default-export": "error"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
+    }
+  }
+}

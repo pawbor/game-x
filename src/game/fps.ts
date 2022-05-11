@@ -7,7 +7,7 @@ export function createFpsCounter() {
       return fps;
     },
     capture() {
-      frames++;
+      frames += 1;
       const now = performance.now();
       if (!start) {
         start = now;

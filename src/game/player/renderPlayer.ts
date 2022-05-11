@@ -1,7 +1,8 @@
+import { forceNonNullable } from '../../assertions';
 import { Camera, transformPosition } from '../camera';
 import { CharacterState } from '../character';
 import { getImage } from '../imageCache';
-import { playerSprites } from './assets';
+import { sprites } from './assets';
 import { Player } from './Player';
 
 export function renderPlayer(props: {
@@ -19,7 +20,10 @@ export function renderPlayer(props: {
 function selectSprite(player: Player): string {
   if (player.state === CharacterState.Walk) {
     const x = Math.floor(performance.now() / 200) % 4;
-    return playerSprites[player.state][player.spriteDirection][x];
+    return forceNonNullable(
+      sprites[player.state][player.spriteDirection][x],
+      `Missing frame "${x}"`
+    );
   }
-  return playerSprites[player.state][player.spriteDirection];
+  return sprites[player.state][player.spriteDirection];
 }
