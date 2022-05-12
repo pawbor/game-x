@@ -8,11 +8,11 @@ export function listenKeyboard(): KeyboardState {
   const pressedKeys: PressedKeys = {};
 
   document.addEventListener('keydown', (event) => {
-    pressedKeys[event.key] = true;
+    pressedKeys[event.code] = true;
   });
 
   document.addEventListener('keyup', (event) => {
-    pressedKeys[event.key] = false;
+    pressedKeys[event.code] = false;
   });
 
   return { pressedKeys };

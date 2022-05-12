@@ -1,10 +1,11 @@
 import * as mCamera from './camera';
-import { createFpsCounter } from './fps';
+import { createFpsCounter, renderFps } from './fps';
 import { gameLoop } from './gameLoop';
 import { listenKeyboard } from './keyboard';
-import { loadMapData } from './loadMapData';
-import { movePlayer } from './player/behavior';
-import { renderWorld } from './world';
+import { executePlayerBehavior } from './player/behavior';
+import { renderWorld } from './world/rendering';
+import { loadWorld } from './world/initialization';
+import { createClock } from './clock/createClock';
 
 export function runGame(parent: HTMLElement) {
   const canvas = document.createElement('canvas');
@@ -22,28 +23,33 @@ export function runGame(parent: HTMLElement) {
   }
   const keyboardState = listenKeyboard();
   const camera = mCamera.create();
-  const { player, boundaries, grass, enemies, staticObjects } = loadMapData();
+  const world = loadWorld();
   const fpsCounter = createFpsCounter();
+  const worldClock = createClock();
+  let firstLoop = true;
 
-  gameLoop((loopCtx) => {
+  gameLoop(() => {
+    if (firstLoop) {
+      firstLoop = false;
+      worldClock.start();
+    }
+    worldClock.tick();
     fpsCounter.capture();
-    movePlayer({
-      player,
+
+    executePlayerBehavior({
+      world,
+      worldClock,
       keyboardState,
-      loopCtx,
-      obstacles: [
-        ...enemies.map((x) => x.hitBox),
-        ...boundaries.map((x) => x.hitBox),
-        ...grass.map((x) => x.hitBox),
-        ...staticObjects.map((x) => x.hitBox),
-      ],
     });
-    mCamera.followPlayer({ player, camera });
+
+    mCamera.followPlayer({ player: world.player, camera });
+
     renderWorld({
       camera,
       canvasCtx,
       fpsCounter,
-      world: { player, boundaries, enemies, grass, staticObjects },
+      world,
     });
+    renderFps({ canvasCtx, fps: fpsCounter.fps() });
   });
 }

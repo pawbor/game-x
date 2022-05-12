@@ -6,30 +6,15 @@ export interface GameLoopContext {
   framesTimeDiff: number;
 }
 
-export type GameFrameRenderer = (props: GameLoopContext) => void;
+export type GameFrameRenderer = () => void;
 
 export function gameLoop(renderGameFrame: GameFrameRenderer) {
-  let startTime = 0;
-  let prevFrameTime = 0;
-
-  requestAnimationFrame((time) => {
-    startTime = time;
-    prevFrameTime = time;
-    render(time);
+  requestAnimationFrame(() => {
+    render();
   });
 
-  function render(time: number) {
-    const elapsedTime = time - startTime;
-    const framesTimeDiff = time - prevFrameTime;
-    prevFrameTime = time;
-
-    renderGameFrame({
-      startTime,
-      prevFrameTime,
-      frameTime: time,
-      elapsedTime,
-      framesTimeDiff,
-    });
+  function render() {
+    renderGameFrame();
 
     requestAnimationFrame(render);
   }

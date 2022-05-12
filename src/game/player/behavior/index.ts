@@ -1,1 +1,1 @@
-export * from './movePlayer';
+export * from './executePlayerBehavior';

@@ -28,3 +28,13 @@ export function createFpsCounter() {
 }
 
 export type FpsCounter = ReturnType<typeof createFpsCounter>;
+
+export function renderFps(props: {
+  canvasCtx: CanvasRenderingContext2D;
+  fps: number;
+}) {
+  const { canvasCtx, fps } = props;
+  canvasCtx.font = '48px sans';
+  canvasCtx.textBaseline = 'top';
+  canvasCtx.fillText(fps.toFixed(1), 10, 10);
+}

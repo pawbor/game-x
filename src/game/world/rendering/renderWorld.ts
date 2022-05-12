@@ -9,7 +9,7 @@ import { HitBox } from '@/game/hitBox';
 import { renderPlayer } from '@/game/player/rendering';
 import { StaticObject } from '@/game/staticObject/models';
 import { renderStaticObject } from '@/game/staticObject/rendering';
-import { World } from './World';
+import { World } from '@/game/world/models';
 
 export function renderWorld(props: {
   canvasCtx: CanvasRenderingContext2D;
@@ -17,7 +17,7 @@ export function renderWorld(props: {
   world: World;
   fpsCounter: FpsCounter;
 }) {
-  const { canvasCtx, camera, world, fpsCounter } = props;
+  const { canvasCtx, camera, world } = props;
   const { player, grass, enemies, staticObjects } = world;
   const { canvas } = canvasCtx;
 
@@ -29,7 +29,6 @@ export function renderWorld(props: {
     ...staticObjects.map(staticObjectRenderer),
     playerRenderer(),
   ]);
-  renderFps({ canvasCtx, fps: fpsCounter.fps() });
   renderHitBoxes({
     canvasCtx,
     camera,
@@ -83,16 +82,6 @@ function ySortRender(sprites: YSortRenderer[]) {
     .slice()
     .sort((s1, s2) => s1.ordinal - s2.ordinal)
     .forEach((s) => s.render());
-}
-
-function renderFps(props: {
-  canvasCtx: CanvasRenderingContext2D;
-  fps: number;
-}) {
-  const { canvasCtx, fps } = props;
-  canvasCtx.font = '48px sans';
-  canvasCtx.textBaseline = 'top';
-  canvasCtx.fillText(fps.toFixed(1), 10, 10);
 }
 
 function renderHitBoxes(props: {

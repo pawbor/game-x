@@ -1,83 +1,56 @@
 import { CharacterState } from '@/game/character';
-import { GameLoopContext } from '@/game/gameLoop';
 import { HitBox } from '@/game/hitBox';
-import { KeyboardState } from '@/game/keyboard';
-import { Player, SpriteDirection } from '@/game/player/models';
+import { Player } from '@/game/player/models';
 import { playerHitBox } from '@/game/player/sprites';
-import { magnitude, normalize, scale, sum, Vector2d } from '@/vector2d';
+import { Clock } from '@/game/clock/Clock';
+import { magnitude, scale, sum, Vector2d } from '@/vector2d';
 import { avoidCollision } from './avoidCollision';
+import { calcSpriteDirection } from './calcSpriteDirection';
 
 const speed = 0.5;
 
-enum KeyMapping {
-  Up = 'ArrowUp',
-  Down = 'ArrowDown',
-  Left = 'ArrowLeft',
-  Right = 'ArrowRight',
-}
-
 export function movePlayer(props: {
   player: Player;
-  keyboardState: KeyboardState;
-  loopCtx: GameLoopContext;
+  moveDirection: Vector2d;
+  worldClock: Clock;
   obstacles: HitBox[];
 }) {
+  const { player, moveDirection } = props;
   const move = calcMove(props);
-  updatePlayer({ player: props.player, move });
+  updatePlayer({ player, move, moveDirection });
 }
 
 function calcMove(props: {
   player: Player;
-  keyboardState: KeyboardState;
-  loopCtx: GameLoopContext;
+  moveDirection: Vector2d;
+  worldClock: Clock;
   obstacles: HitBox[];
 }) {
-  const { keyboardState, loopCtx, player, obstacles } = props;
-  const timeDiff = loopCtx.framesTimeDiff;
-  const direction = calcDirection(keyboardState);
+  const { moveDirection, worldClock, player, obstacles } = props;
+  const tickDiff = worldClock.ticksDiff();
+  const move = scale(moveDirection, speed * tickDiff);
 
-  const move = scale(direction, speed * timeDiff);
   return avoidCollision({ player, move, obstacles });
 }
 
-function calcDirection(keyboardState: KeyboardState) {
-  const { pressedKeys } = keyboardState;
-  const direction: Vector2d = [0, 0];
-
-  if (pressedKeys[KeyMapping.Up]) {
-    direction[1] -= 1;
-  }
-  if (pressedKeys[KeyMapping.Down]) {
-    direction[1] += 1;
-  }
-  if (pressedKeys[KeyMapping.Left]) {
-    direction[0] -= 1;
-  }
-  if (pressedKeys[KeyMapping.Right]) {
-    direction[0] += 1;
-  }
-
-  return normalize(direction);
-}
-
-function updatePlayer(props: { player: Player; move: Vector2d }) {
-  const { player, move } = props;
+function updatePlayer(props: {
+  player: Player;
+  move: Vector2d;
+  moveDirection: Vector2d;
+}) {
+  const { player, move, moveDirection } = props;
 
   player.position = sum(player.position, move);
   player.hitBox = playerHitBox(player.position);
   player.state = calcCharacterState(move);
-  player.spriteDirection = calcSpriteDirection(move);
+  player.spriteDirection = calcSpriteDirection({
+    move,
+    moveDirection,
+    previous: player.spriteDirection,
+  });
 }
 
 function calcCharacterState(move: Vector2d) {
   const distance = magnitude(move);
   return distance === 0 ? CharacterState.Idle : CharacterState.Walk;
-}
-
-function calcSpriteDirection(move: Vector2d): SpriteDirection {
-  if (move[1] < 0) return SpriteDirection.Up;
-  if (move[1] > 0) return SpriteDirection.Down;
-  if (move[0] < 0) return SpriteDirection.Left;
-  if (move[0] > 0) return SpriteDirection.Right;
-  return SpriteDirection.Down;
 }
