@@ -8,4 +8,5 @@ export interface Enemy {
   position: Vector2d;
   hitBox: HitBox;
   state: CharacterState;
+  animationStart: number;
 }

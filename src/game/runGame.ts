@@ -1,11 +1,9 @@
-import * as mCamera from './camera';
 import { createFpsCounter, renderFps } from './fps';
 import { gameLoop } from './gameLoop';
 import { listenKeyboard } from './keyboard';
-import { executePlayerBehavior } from './player/behavior';
+import { createWorld } from './world/behavior';
+import { World } from './world/models';
 import { renderWorld } from './world/rendering';
-import { loadWorld } from './world/initialization';
-import { createClock } from './clock/createClock';
 
 export function runGame(parent: HTMLElement) {
   const canvas = document.createElement('canvas');
@@ -21,35 +19,50 @@ export function runGame(parent: HTMLElement) {
   if (!canvasCtx) {
     throw new Error('Canvas not supported');
   }
-  const keyboardState = listenKeyboard();
-  const camera = mCamera.create();
-  const world = loadWorld();
+
+  const world = createWorld();
+  const pauseController = createPauseController();
   const fpsCounter = createFpsCounter();
-  const worldClock = createClock();
   let firstLoop = true;
 
   gameLoop(() => {
     if (firstLoop) {
       firstLoop = false;
-      worldClock.start();
+      world.clock.start();
     }
-    worldClock.tick();
+
+    world.clock.tick();
+    pauseController.update({ world });
     fpsCounter.capture();
 
-    executePlayerBehavior({
-      world,
-      worldClock,
-      keyboardState,
-    });
-
-    mCamera.followPlayer({ player: world.player, camera });
-
     renderWorld({
-      camera,
       canvasCtx,
-      fpsCounter,
       world,
     });
     renderFps({ canvasCtx, fps: fpsCounter.fps() });
   });
+}
+
+function createPauseController() {
+  const keyboardState = listenKeyboard();
+  let debounceStart = -1;
+
+  return {
+    update(props: { world: World }) {
+      const { world } = props;
+
+      if (testDebounce() && keyboardState.pressedKeys['Escape']) {
+        world.clock.toggle();
+        debounceStart = performance.now();
+      }
+    },
+  };
+
+  function testDebounce(): boolean {
+    if (debounceStart < 0) return true;
+
+    const now = performance.now();
+    const diff = now - debounceStart;
+    return diff > 500;
+  }
 }

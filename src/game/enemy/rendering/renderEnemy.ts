@@ -1,5 +1,6 @@
 import { forceNonNullable } from '@/assertions';
 import { Camera, transformPosition } from '@/game/camera';
+import { Clock } from '@/game/clock/Clock';
 import { Enemy } from '@/game/enemy/models';
 import { selectEnemySprites, selectSpriteOffset } from '@/game/enemy/sprites';
 import { getImage } from '@/game/imageCache';
@@ -9,8 +10,9 @@ export function renderEnemy(props: {
   canvasCtx: CanvasRenderingContext2D;
   camera: Camera;
   enemy: Enemy;
+  clock: Clock;
 }) {
-  const { canvasCtx, camera, enemy } = props;
+  const { canvasCtx, camera, enemy, clock } = props;
   const { position } = enemy;
   const spriteOffset = selectSpriteOffset(enemy);
   const [x, y] = transformPosition({
@@ -18,12 +20,18 @@ export function renderEnemy(props: {
     canvasCtx,
     camera,
   });
-  const img = getImage({ src: selectSprite(enemy) });
+  const img = getImage({ src: selectSprite(enemy, clock) });
   canvasCtx.drawImage(img, x, y);
 }
 
-function selectSprite(enemy: Enemy): string {
-  const frames = selectEnemySprites(enemy);
-  const x = Math.floor(performance.now() / 200) % frames.length;
-  return forceNonNullable(frames[x], `Missing frame ${x}`);
+function selectSprite(enemy: Enemy, clock: Clock): string {
+  const animationFrames = selectEnemySprites(enemy);
+  const animationElapsed = clock.now() - enemy.animationStart;
+  const frameIndex =
+    Math.floor(animationElapsed / 200) % animationFrames.length;
+
+  return forceNonNullable(
+    animationFrames[frameIndex],
+    `Missing frame ${frameIndex}`
+  );
 }

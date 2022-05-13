@@ -1,7 +1,6 @@
 import { Camera, transformPosition } from '@/game/camera';
 import { Enemy } from '@/game/enemy/models';
 import { renderEnemy } from '@/game/enemy/rendering';
-import { FpsCounter } from '@/game/fps';
 import { Grass } from '@/game/grass/models';
 import { renderGrass } from '@/game/grass/rendering';
 import { renderGround } from '@/game/ground/rendering';
@@ -13,12 +12,10 @@ import { World } from '@/game/world/models';
 
 export function renderWorld(props: {
   canvasCtx: CanvasRenderingContext2D;
-  camera: Camera;
   world: World;
-  fpsCounter: FpsCounter;
 }) {
-  const { canvasCtx, camera, world } = props;
-  const { player, grass, enemies, staticObjects } = world;
+  const { canvasCtx, world } = props;
+  const { player, grass, enemies, staticObjects, camera, clock } = world;
   const { canvas } = canvasCtx;
 
   canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
@@ -35,11 +32,11 @@ export function renderWorld(props: {
     items: [player, ...grass, ...enemies, ...staticObjects],
   });
 
-  function grassRenderer(x: Grass): YSortRenderer {
+  function grassRenderer(grassSegment: Grass): YSortRenderer {
     return {
-      ordinal: x.position[1],
+      ordinal: grassSegment.position[1],
       render() {
-        renderGrass({ canvasCtx, camera, grass: x });
+        renderGrass({ canvasCtx, camera, grass: grassSegment });
       },
     };
   }
@@ -48,7 +45,7 @@ export function renderWorld(props: {
     return {
       ordinal: enemy.position[1],
       render() {
-        renderEnemy({ canvasCtx, camera, enemy });
+        renderEnemy({ canvasCtx, camera, enemy, clock });
       },
     };
   }
@@ -66,7 +63,7 @@ export function renderWorld(props: {
     return {
       ordinal: player.position[1],
       render() {
-        renderPlayer({ canvasCtx, camera, player });
+        renderPlayer({ canvasCtx, player, camera, clock });
       },
     };
   }

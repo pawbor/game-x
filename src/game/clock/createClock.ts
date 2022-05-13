@@ -23,6 +23,13 @@ export function createClock(): Clock {
       lastTick = realNow;
       listeners.forEach((listener) => listener(clock));
     },
+    toggle() {
+      if (running) {
+        clock.stop();
+      } else {
+        clock.start();
+      }
+    },
     now() {
       return worldNow;
     },

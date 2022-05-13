@@ -4,6 +4,6 @@ export interface Camera {
   center: Vector2d;
 }
 
-export function create(): Camera {
+export function createCamera(): Camera {
   return { center: [0, 0] };
 }

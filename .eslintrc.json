@@ -12,6 +12,7 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
+    "dot-notation": "off",
     "max-classes-per-file": "off",
     "no-console": "error",
     "import/extensions": [

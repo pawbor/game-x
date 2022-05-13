@@ -4,8 +4,8 @@ import left from './left.png';
 import right from './right.png';
 
 export const idle = {
-  down,
-  up,
-  left,
-  right,
+  down: [down],
+  up: [up],
+  left: [left],
+  right: [right],
 };

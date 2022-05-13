@@ -1,3 +1,4 @@
+import { isNonNullable } from '@/assertions';
 import { CharacterState } from '@/game/character';
 import { Enemy, EnemyType } from '@/game/enemy/models';
 import { enemyHitBox } from '@/game/enemy/sprites';
@@ -10,9 +11,13 @@ const tileMapping: Record<string, EnemyType> = {
   '393': EnemyType.Squid,
 };
 
-export function initEnemies(charTiles: Tile[]): Enemy[] {
-  return charTiles
-    .map((tile) => {
+export function initEnemies(props: {
+  characterTiles: Tile[];
+  creationTime: number;
+}): Enemy[] {
+  const { characterTiles, creationTime } = props;
+  return characterTiles
+    .map((tile): Enemy | null => {
       const type = tileMapping[tile.tileId];
       if (!type) return null;
 
@@ -24,7 +29,8 @@ export function initEnemies(charTiles: Tile[]): Enemy[] {
         position,
         hitBox,
         state: CharacterState.Idle,
+        animationStart: creationTime,
       };
     })
-    .filter((enemy): enemy is Enemy => enemy !== null);
+    .filter(isNonNullable);
 }
