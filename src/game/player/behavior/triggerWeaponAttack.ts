@@ -2,18 +2,18 @@ import { CharacterState } from '@/game/character';
 import { Clock } from '@/game/clock/Clock';
 import { createTimer } from '@/game/clock/createTimer';
 import { Player } from '@/game/player/models';
+import { updateState } from './updateState';
 
-export function triggerWeaponAttack(props: {
-  player: Player;
-  worldClock: Clock;
-}) {
-  const { player, worldClock } = props;
-  player.state = CharacterState.Attack;
+export function triggerWeaponAttack(props: { player: Player; clock: Clock }) {
+  const { player, clock } = props;
+
+  updateState({ player, state: CharacterState.Attack, clock });
+
   createTimer({
-    clock: worldClock,
+    clock,
     delay: 500,
     callback: () => {
-      player.state = CharacterState.Idle;
+      updateState({ player, state: CharacterState.Idle, clock });
     },
   });
 }

@@ -24,7 +24,7 @@ export function executePlayerBehavior(props: { world: World }) {
     if (player.state === CharacterState.Attack) return;
 
     if (pressedKeys[KeyMapping.WeaponAttack]) {
-      triggerWeaponAttack({ player, worldClock });
+      triggerWeaponAttack({ player, clock: worldClock });
     }
   }
 
@@ -36,7 +36,7 @@ export function executePlayerBehavior(props: { world: World }) {
     movePlayer({
       player,
       moveDirection,
-      worldClock,
+      clock: worldClock,
       obstacles: [
         ...enemies.map((x) => x.hitBox),
         ...boundaries.map((x) => x.hitBox),

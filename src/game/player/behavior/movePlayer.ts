@@ -6,28 +6,29 @@ import { Clock } from '@/game/clock/Clock';
 import { magnitude, scale, sum, Vector2d } from '@/vector2d';
 import { avoidCollision } from './avoidCollision';
 import { calcSpriteDirection } from './calcSpriteDirection';
+import { updateState } from './updateState';
 
 const speed = 0.5;
 
 export function movePlayer(props: {
   player: Player;
   moveDirection: Vector2d;
-  worldClock: Clock;
+  clock: Clock;
   obstacles: HitBox[];
 }) {
-  const { player, moveDirection } = props;
+  const { player, moveDirection, clock } = props;
   const move = calcMove(props);
-  updatePlayer({ player, move, moveDirection });
+  updatePlayer({ player, move, moveDirection, clock });
 }
 
 function calcMove(props: {
   player: Player;
   moveDirection: Vector2d;
-  worldClock: Clock;
+  clock: Clock;
   obstacles: HitBox[];
 }) {
-  const { moveDirection, worldClock, player, obstacles } = props;
-  const tickDiff = worldClock.ticksDiff();
+  const { moveDirection, clock, player, obstacles } = props;
+  const tickDiff = clock.ticksDiff();
   const move = scale(moveDirection, speed * tickDiff);
 
   return avoidCollision({ player, move, obstacles });
@@ -37,12 +38,13 @@ function updatePlayer(props: {
   player: Player;
   move: Vector2d;
   moveDirection: Vector2d;
+  clock: Clock;
 }) {
-  const { player, move, moveDirection } = props;
+  const { player, move, moveDirection, clock } = props;
 
   player.position = sum(player.position, move);
   player.hitBox = playerHitBox(player.position);
-  player.state = calcCharacterState(move);
+  updateState({ player, state: calcCharacterState(move), clock });
   player.spriteDirection = calcSpriteDirection({
     move,
     moveDirection,
