@@ -1,4 +1,4 @@
-import { SpriteDirection } from '@/game/player/models';
+import { SpriteDirection } from '@/game/sprite/SpriteDirection';
 import { Vector2d } from '@/vector2d';
 
 export function calcSpriteDirection(props: {

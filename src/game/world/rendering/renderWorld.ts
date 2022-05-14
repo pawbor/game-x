@@ -8,6 +8,8 @@ import { HitBox } from '@/game/hitBox';
 import { renderPlayer } from '@/game/player/rendering';
 import { StaticObject } from '@/game/staticObject/models';
 import { renderStaticObject } from '@/game/staticObject/rendering';
+import { renderWeaponAttack } from '@/game/weaponAttack/renderWeaponAttack';
+import { WeaponAttack } from '@/game/weaponAttack/WeaponAttack';
 import { World } from '@/game/world/models';
 
 export function renderWorld(props: {
@@ -15,35 +17,45 @@ export function renderWorld(props: {
   world: World;
 }) {
   const { canvasCtx, world } = props;
-  const { player, grass, enemies, staticObjects, camera, clock } = world;
+  const {
+    player,
+    grasses,
+    enemies,
+    staticObjects,
+    camera,
+    clock,
+    weaponAttacks,
+  } = world;
   const { canvas } = canvasCtx;
 
   canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
   renderGround({ canvasCtx, camera });
   ySortRender([
-    ...grass.map(grassRenderer),
+    ...grasses.map(grassRenderer),
     ...enemies.map(enemyRenderer),
     ...staticObjects.map(staticObjectRenderer),
+    ...weaponAttacks.map(weaponAttackRenderer),
     playerRenderer(),
   ]);
+
   renderHitBoxes({
     canvasCtx,
     camera,
-    items: [player, ...grass, ...enemies, ...staticObjects],
+    items: [player, ...grasses, ...enemies, ...staticObjects, ...weaponAttacks],
   });
 
-  function grassRenderer(grassSegment: Grass): YSortRenderer {
+  function grassRenderer(grass: Grass): YSortRenderer {
     return {
-      ordinal: grassSegment.position[1],
+      y: grass.hitBox.bottom,
       render() {
-        renderGrass({ canvasCtx, camera, grass: grassSegment });
+        renderGrass({ canvasCtx, camera, grass });
       },
     };
   }
 
   function enemyRenderer(enemy: Enemy): YSortRenderer {
     return {
-      ordinal: enemy.position[1],
+      y: enemy.hitBox.bottom,
       render() {
         renderEnemy({ canvasCtx, camera, enemy, clock });
       },
@@ -52,32 +64,41 @@ export function renderWorld(props: {
 
   function staticObjectRenderer(staticObject: StaticObject): YSortRenderer {
     return {
-      ordinal: staticObject.position[1],
+      y: staticObject.hitBox.bottom,
       render() {
         renderStaticObject({ canvasCtx, camera, staticObject });
       },
     };
   }
 
-  function playerRenderer() {
+  function playerRenderer(): YSortRenderer {
     return {
-      ordinal: player.position[1],
+      y: player.hitBox.bottom,
       render() {
         renderPlayer({ canvasCtx, player, camera, clock });
+      },
+    };
+  }
+
+  function weaponAttackRenderer(weaponAttack: WeaponAttack): YSortRenderer {
+    return {
+      y: weaponAttack.hitBox.bottom,
+      render() {
+        renderWeaponAttack({ weaponAttack, canvasCtx, world });
       },
     };
   }
 }
 
 interface YSortRenderer {
-  ordinal: number;
+  y: number;
   render(): void;
 }
 
 function ySortRender(sprites: YSortRenderer[]) {
   sprites
     .slice()
-    .sort((s1, s2) => s1.ordinal - s2.ordinal)
+    .sort((s1, s2) => s1.y - s2.y)
     .forEach((s) => s.render());
 }
 

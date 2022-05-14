@@ -30,6 +30,8 @@ export function initEnemies(props: {
         hitBox,
         state: CharacterState.Idle,
         animationStart: creationTime,
+        health: 1,
+        invincible: false,
       };
     })
     .filter(isNonNullable);

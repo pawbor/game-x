@@ -2,7 +2,8 @@ import { CharacterState } from '@/game/character';
 import { HitBox } from '@/game/hitBox';
 import { KeyboardState } from '@/game/keyboard';
 import { Vector2d } from '@/vector2d';
-import { SpriteDirection } from './SpriteDirection';
+import { SpriteDirection } from '@/game/sprite/SpriteDirection';
+import { WeaponType } from '@/game/availableWeapons/WeaponType';
 
 export interface Player {
   position: Vector2d;
@@ -11,4 +12,5 @@ export interface Player {
   spriteDirection: SpriteDirection;
   keyboardState: KeyboardState;
   animationStart: number;
+  wieldedWeapon: WeaponType;
 }

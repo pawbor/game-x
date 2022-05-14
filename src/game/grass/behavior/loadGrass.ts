@@ -6,12 +6,17 @@ import grassMap from './grass.csv';
 
 export function loadGrass() {
   const tiles = parseTileMap(grassMap);
-  const grass = tiles.map(createGrass);
-  return { grass };
+  return tiles.map(createGrass);
 }
 
 function createGrass(tile: Tile): Grass {
   const { position } = tile;
   const hitBox = grassHitBox(position);
-  return { position, hitBox, tileId: tile.tileId };
+  return {
+    position,
+    hitBox,
+    tileId: tile.tileId,
+    health: 1,
+    invincible: false,
+  };
 }

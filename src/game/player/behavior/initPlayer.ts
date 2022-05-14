@@ -1,7 +1,9 @@
+import { WeaponType } from '@/game/availableWeapons/WeaponType';
 import { CharacterState } from '@/game/character';
 import { listenKeyboard } from '@/game/keyboard';
-import { Player, SpriteDirection } from '@/game/player/models';
+import { Player } from '@/game/player/models';
 import { playerHitBox } from '@/game/player/sprites';
+import { SpriteDirection } from '@/game/sprite/SpriteDirection';
 import { Tile } from '@/game/tile';
 
 export function initPlayer(props: {
@@ -23,5 +25,6 @@ export function initPlayer(props: {
     spriteDirection: SpriteDirection.Down,
     keyboardState: listenKeyboard(),
     animationStart: creationTime,
+    wieldedWeapon: WeaponType.Sword,
   };
 }

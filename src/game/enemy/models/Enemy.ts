@@ -1,12 +1,11 @@
 import { CharacterState } from '@/game/character';
-import { HitBox } from '@/game/hitBox';
+import { Damageable } from '@/game/damage/Damageable';
 import { Vector2d } from '@/vector2d';
 import { EnemyType } from './EnemyType';
 
-export interface Enemy {
+export interface Enemy extends Damageable {
   type: EnemyType;
   position: Vector2d;
-  hitBox: HitBox;
   state: CharacterState;
   animationStart: number;
 }

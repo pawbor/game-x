@@ -8,10 +8,11 @@
   "scripts": {
     "start": "webpack serve --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
+    "test": "yarn test:types && yarn lint:all",
     "test:types": "tsc --noEmit",
     "lint": "eslint",
-    "lint:fix": "npm run lint -- --fix",
-    "lint:all": "npm run lint -- src"
+    "lint:all": "yarn run lint src",
+    "lint:fix": "yarn run lint:all --fix"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",

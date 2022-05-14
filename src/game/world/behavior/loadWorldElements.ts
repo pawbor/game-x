@@ -11,7 +11,7 @@ export function loadWorldElements(props: { creationTime: number }) {
   const player = initPlayer({ characterTiles, creationTime });
   const enemies = initEnemies({ characterTiles, creationTime });
   const staticObjects = loadStaticObjects();
-  const { boundaries } = loadBoundaries();
-  const { grass } = loadGrass();
-  return { player, boundaries, grass, enemies, staticObjects };
+  const boundaries = loadBoundaries();
+  const grasses = loadGrass();
+  return { player, boundaries, grasses, enemies, staticObjects };
 }

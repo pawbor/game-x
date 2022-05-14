@@ -12,6 +12,8 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
+    "default-case": "off",
+    "consistent-return": "off",
     "dot-notation": "off",
     "max-classes-per-file": "off",
     "no-console": "error",

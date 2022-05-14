@@ -6,8 +6,7 @@ import { boundaryHitBox } from './boundaryHitBox';
 
 export function loadBoundaries() {
   const tiles = parseTileMap(boundariesMap);
-  const boundaries = tiles.map(createBoundary);
-  return { boundaries };
+  return tiles.map(createBoundary);
 }
 
 function createBoundary(tile: Tile): Boundary {

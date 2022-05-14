@@ -11,7 +11,7 @@ export function executePlayerBehavior(props: { world: World }) {
     player,
     boundaries,
     enemies,
-    grass,
+    grasses,
     staticObjects,
     clock: worldClock,
   } = world;
@@ -24,7 +24,7 @@ export function executePlayerBehavior(props: { world: World }) {
     if (player.state === CharacterState.Attack) return;
 
     if (pressedKeys[KeyMapping.WeaponAttack]) {
-      triggerWeaponAttack({ player, clock: worldClock });
+      triggerWeaponAttack({ player, world });
     }
   }
 
@@ -40,7 +40,7 @@ export function executePlayerBehavior(props: { world: World }) {
       obstacles: [
         ...enemies.map((x) => x.hitBox),
         ...boundaries.map((x) => x.hitBox),
-        ...grass.map((x) => x.hitBox),
+        ...grasses.map((x) => x.hitBox),
         ...staticObjects.map((x) => x.hitBox),
       ],
     });
