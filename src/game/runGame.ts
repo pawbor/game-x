@@ -1,9 +1,9 @@
 import { createFpsCounter, renderFps } from './fps';
 import { gameLoop } from './gameLoop';
 import { listenKeyboard } from './keyboard';
-import { createWorld } from './world/behavior';
-import { World } from './world/models';
-import { renderWorld } from './world/rendering';
+import { createWorld } from './world/createWorld';
+import { World } from './world/World';
+import { renderWorld } from './world/renderWorld';
 
 export function runGame(parent: HTMLElement) {
   const canvas = document.createElement('canvas');

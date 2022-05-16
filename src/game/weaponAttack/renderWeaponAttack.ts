@@ -1,9 +1,9 @@
 import { getWeaponAttackSprite } from '@/game/availableWeapons/getWeaponConfig';
-import { transformPosition } from '@/game/camera';
-import { getImage } from '@/game/imageCache';
+import { transformPosition } from '@/game/camera/transformPosition';
+import { getImage } from '@/game/imageCache/getImage';
 import { WeaponAttack } from '@/game/weaponAttack/WeaponAttack';
-import { World } from '@/game/world/models';
-import { sum } from '@/vector2d';
+import { World } from '@/game/world/World';
+import { sum } from '@/vector2d/sum';
 
 export function renderWeaponAttack(props: {
   canvasCtx: CanvasRenderingContext2D;

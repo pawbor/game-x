@@ -2,7 +2,7 @@ import {
   AttackSprite,
   WeaponSprites,
 } from '@/game/availableWeapons/WeaponConfig';
-import { create } from '@/game/hitBox';
+import { create } from '@/game/hitBox/HitBox';
 import downSrc from './down.png';
 import fullSrc from './full.png';
 import leftSrc from './left.png';

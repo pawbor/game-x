@@ -1,4 +1,4 @@
-import { HitBox } from "@/game/hitBox";
+import { HitBox } from "@/game/hitBox/HitBox";
 
 export interface Damageable {
   health: number;

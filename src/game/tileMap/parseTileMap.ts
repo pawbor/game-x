@@ -1,5 +1,6 @@
-import { Tile, TileSize } from '@/game/tile';
-import { scale } from '@/vector2d';
+import { Tile } from '@/game/tile/Tile';
+import { TileSize } from '@/game/tile/config';
+import { scale } from '@/vector2d/scale';
 import { TileMap } from './TileMap';
 
 export function parseTileMap(tileMap: TileMap): Tile[] {

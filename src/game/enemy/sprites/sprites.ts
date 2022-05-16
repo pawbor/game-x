@@ -1,7 +1,8 @@
-import { CharacterState } from '@/game/character';
-import { EnemySprites, EnemyType, StateSprites } from '@/game/enemy/models';
-import { HitBox } from '@/game/hitBox';
-import { Vector2d } from '@/vector2d';
+import { CharacterState } from '@/game/character/CharacterState';
+import { EnemySprites, StateSprites } from '@/game/enemy/EnemySprites';
+import { EnemyType } from '@/game/enemy/EnemyType';
+import { HitBox } from '@/game/hitBox/HitBox';
+import { Vector2d } from '@/vector2d/Vector2d';
 import { bamboo } from './bamboo';
 import { raccoon } from './raccoon';
 import { spirit } from './spirit';

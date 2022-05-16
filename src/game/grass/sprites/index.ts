@@ -1,2 +1,2 @@
 export * from './sprites';
-export * from './grassHitBox';
+export * from '../grassHitBox';

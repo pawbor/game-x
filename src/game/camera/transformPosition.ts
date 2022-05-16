@@ -1,4 +1,5 @@
-import { diff, Vector2d } from '@/vector2d';
+import { Vector2d } from '@/vector2d/Vector2d';
+import { diff } from '@/vector2d/diff';
 import { Camera } from './Camera';
 import { cameraOffset } from './cameraOffset';
 

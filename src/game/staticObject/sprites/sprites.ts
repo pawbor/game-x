@@ -1,7 +1,7 @@
-import { forceNonNullable } from '@/assertions';
-import { create, HitBox } from '@/game/hitBox';
-import { TileSize } from '@/game/tile';
-import { Vector2d } from '@/vector2d';
+import { forceNonNullable } from '@/assertions/nonNullable';
+import { create, HitBox } from '@/game/hitBox/HitBox';
+import { TileSize } from '@/game/tile/config';
+import { Vector2d } from '@/vector2d/Vector2d';
 import so01 from './01.png';
 import so02 from './02.png';
 import so03 from './03.png';

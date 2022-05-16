@@ -1,4 +1,4 @@
-import { SpriteDirection } from '../sprite/SpriteDirection';
+import { SpriteDirection } from '@/game/sprite/SpriteDirection';
 import { config as sword } from './sword';
 import { WeaponConfig, AttackSprite } from './WeaponConfig';
 import { WeaponType } from './WeaponType';

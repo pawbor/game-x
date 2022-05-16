@@ -1,9 +1,9 @@
+import { getWeaponAttackSprite } from '@/game/availableWeapons/getWeaponConfig';
 import { WeaponType } from '@/game/availableWeapons/WeaponType';
-import { create } from '@/game/hitBox';
-import { Player } from '@/game/player/models';
+import { create } from '@/game/hitBox/HitBox';
+import { Player } from '@/game/player/Player';
 import { SpriteDirection } from '@/game/sprite/SpriteDirection';
-import { Vector2d } from '@/vector2d';
-import { getWeaponAttackSprite } from '../availableWeapons/getWeaponConfig';
+import { Vector2d } from '@/vector2d/Vector2d';
 import { WeaponAttack } from './WeaponAttack';
 
 export function createWeaponAttack(props: { player: Player }): WeaponAttack {
@@ -16,7 +16,7 @@ export function createWeaponAttack(props: { player: Player }): WeaponAttack {
     position,
     hitBox: weaponHitBox({ type, position, spriteDirection }),
     spriteDirection,
-    attackPower: 20
+    attackPower: 20,
   };
 }
 

@@ -1,6 +1,6 @@
 import { Clock } from '@/game/clock/Clock';
 import { createTimer } from '@/game/clock/createTimer';
-import { testCollision } from '@/game/hitBox';
+import { testCollision } from '@/game/hitBox/testCollision';
 import { Damageable } from './Damageable';
 import { DamageDealer } from './DamageDealer';
 

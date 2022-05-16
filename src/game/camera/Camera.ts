@@ -1,4 +1,4 @@
-import { Vector2d } from '@/vector2d';
+import { Vector2d } from '@/vector2d/Vector2d';
 
 export interface Camera {
   center: Vector2d;

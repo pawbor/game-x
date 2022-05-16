@@ -1,6 +1,6 @@
 import { Damageable } from '@/game/damage/Damageable';
 import { tryToDealDamage } from '@/game/damage/tryToDealDamage';
-import { World } from '@/game/world/models';
+import { World } from '@/game/world/World';
 import { WeaponAttack } from './WeaponAttack';
 
 export function executeWeaponAttackBehavior(props: {
