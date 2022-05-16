@@ -1,7 +1,8 @@
 import { isNonNullable } from '@/assertions/nonNullable';
+import { EnemyType } from '@/game/availableEnemies/EnemyType';
+import { getEnemyConfig } from '@/game/availableEnemies/getEnemyConfig';
 import { CharacterState } from '@/game/character/CharacterState';
 import { Enemy } from '@/game/enemy/Enemy';
-import { EnemyType } from '@/game/enemy/EnemyType';
 import { enemyHitBox } from '@/game/enemy/enemyHitBox';
 import { Tile } from '@/game/tile/Tile';
 
@@ -24,6 +25,7 @@ export function initEnemies(props: {
 
       const { position } = tile;
       const hitBox = enemyHitBox({ type, position });
+      const config = getEnemyConfig(type);
 
       return {
         type,
@@ -31,7 +33,7 @@ export function initEnemies(props: {
         hitBox,
         state: CharacterState.Idle,
         animationStart: creationTime,
-        health: 1,
+        health: config.maxHealth,
         invincible: false,
       };
     })

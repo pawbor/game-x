@@ -1,7 +1,7 @@
-import { EnemyType } from '@/game/enemy/EnemyType';
-import { create } from '@/game/hitBox/HitBox';
+import { EnemyType } from '@/game/availableEnemies/EnemyType';
+import { getEnemyConfig } from '@/game/availableEnemies/getEnemyConfig';
+import { create, HitBox } from '@/game/hitBox/HitBox';
 import { Vector2d } from '@/vector2d/Vector2d';
-import { selectSpriteHitBox } from './sprites/sprites';
 
 export function enemyHitBox(props: { type: EnemyType; position: Vector2d }) {
   const { type, position } = props;
@@ -12,4 +12,8 @@ export function enemyHitBox(props: { type: EnemyType; position: Vector2d }) {
     width,
     height,
   });
+}
+
+function selectSpriteHitBox(props: { type: EnemyType }): HitBox {
+  return getEnemyConfig(props.type).sprites.spiritHitBox;
 }

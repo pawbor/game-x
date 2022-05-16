@@ -1,4 +1,5 @@
-import { diff, Vector2d } from '@/vector2d';
+import { diff } from '@/vector2d/diff';
+import { Vector2d } from '@/vector2d/Vector2d';
 import { Camera } from './Camera';
 
 export function cameraOffset(props: {
