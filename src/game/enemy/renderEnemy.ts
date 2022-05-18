@@ -5,11 +5,12 @@ import { getEnemyConfig } from '@/game/availableEnemies/getEnemyConfig';
 import { Camera } from '@/game/camera/Camera';
 import { transformPosition } from '@/game/camera/transformPosition';
 import { CharacterState } from '@/game/character/CharacterState';
-import { Clock } from '@/game/clock/Clock';
+import { Clock } from '@/time/Clock';
 import { Enemy } from '@/game/enemy/Enemy';
 import { getImage } from '@/game/imageCache/getImage';
 import { sum } from '@/vector2d/sum';
 import { Vector2d } from '@/vector2d/Vector2d';
+import { invincibleRenderDecorator } from '@/game/damage/invincibleRenderDecorator';
 
 export function renderEnemy(props: {
   canvasCtx: CanvasRenderingContext2D;
@@ -26,12 +27,17 @@ export function renderEnemy(props: {
     camera,
   });
   const img = getImage({ src: selectSprite(enemy, clock) });
-  canvasCtx.drawImage(img, x, y);
+
+  const decorator = invincibleRenderDecorator({ damageable: enemy });
+  const renderer = decorator(() => {
+    canvasCtx.drawImage(img, x, y);
+  });
+  renderer({ canvasCtx });
 }
 
 function selectSprite(enemy: Enemy, clock: Clock): string {
   const animationFrames = selectAnimation(enemy);
-  const animationElapsed = clock.now() - enemy.animationStart;
+  const animationElapsed = clock.timePassed() - enemy.animationStart;
   const frameIndex =
     Math.floor(animationElapsed / 200) % animationFrames.length;
 

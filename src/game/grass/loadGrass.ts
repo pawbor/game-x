@@ -17,6 +17,6 @@ function createGrass(tile: Tile): Grass {
     hitBox,
     tileId: tile.tileId,
     health: 1,
-    invincible: false,
+    invincibilityTimer: undefined,
   };
 }

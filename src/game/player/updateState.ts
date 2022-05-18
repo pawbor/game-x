@@ -1,5 +1,5 @@
 import { CharacterState } from '@/game/character/CharacterState';
-import { Clock } from '@/game/clock/Clock';
+import { Clock } from '@/time/Clock';
 import { Player } from '@/game/player/Player';
 
 export function updateState(props: {
@@ -10,5 +10,5 @@ export function updateState(props: {
   const { player, state, clock } = props;
   if (player.state === state) return;
   player.state = state;
-  player.animationStart = clock.now();
+  player.animationStart = clock.timePassed();
 }

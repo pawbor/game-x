@@ -34,7 +34,7 @@ export function initEnemies(props: {
         state: CharacterState.Idle,
         animationStart: creationTime,
         health: config.maxHealth,
-        invincible: false,
+        invincibilityTimer: undefined,
       };
     })
     .filter(isNonNullable);

@@ -1,6 +1,6 @@
 import { removeItem } from '@/array/removeItem';
 import { CharacterState } from '@/game/character/CharacterState';
-import { createTimer } from '@/game/clock/createTimer';
+import { createTimer } from '@/time/createTimer';
 import { Player } from '@/game/player/Player';
 import { createWeaponAttack } from '@/game/weaponAttack/createWeaponAttack';
 import { World } from '@/game/world/World';
@@ -15,9 +15,9 @@ export function triggerWeaponAttack(props: { player: Player; world: World }) {
   weaponAttacks.push(weaponAttack);
 
   createTimer({
-    clock,
-    delay: 500,
-    callback: () => {
+    referenceClock: clock,
+    duration: 200,
+    onDone: () => {
       updateState({ player, state: CharacterState.Idle, clock });
       removeItem({ array: weaponAttacks, item: weaponAttack });
     },

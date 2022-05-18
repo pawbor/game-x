@@ -1,5 +1,5 @@
 import { CharacterState } from '@/game/character/CharacterState';
-import { Clock } from '@/game/clock/Clock';
+import { Clock } from '@/time/Clock';
 import { HitBox } from '@/game/hitBox/HitBox';
 import { Player } from '@/game/player/Player';
 import { playerHitBox } from '@/game/player/playerHitBox';
@@ -31,7 +31,7 @@ function calcMove(props: {
   obstacles: HitBox[];
 }) {
   const { moveDirection, clock, player, obstacles } = props;
-  const tickDiff = clock.ticksDiff();
+  const tickDiff = clock.lastTickDuration();
   const move = scale(moveDirection, speed * tickDiff);
 
   return avoidCollision({ player, move, obstacles });

@@ -1,5 +1,5 @@
 import { Camera } from '@/game/camera/Camera';
-import { Clock } from '@/game/clock/Clock';
+import { Clock } from '@/time/Clock';
 import { Enemy } from '@/game/enemy/Enemy';
 import { Grass } from '@/game/grass/Grass';
 import { Boundary } from '@/game/ground/Boundary';

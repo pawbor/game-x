@@ -1,7 +1,7 @@
 import { forceNonNullable } from '@/assertions/nonNullable';
 import { Camera } from '@/game/camera/Camera';
 import { transformPosition } from '@/game/camera/transformPosition';
-import { Clock } from '@/game/clock/Clock';
+import { Clock } from '@/time/Clock';
 import { getImage } from '@/game/imageCache/getImage';
 import { Player } from '@/game/player/Player';
 import { sprites } from '@/game/player/sprites';
@@ -20,7 +20,7 @@ export function renderPlayer(props: {
 }
 
 function selectSprite(player: Player, clock: Clock): string {
-  const animationElapsed = clock.now() - player.animationStart;
+  const animationElapsed = clock.timePassed() - player.animationStart;
   const animationFrames = sprites[player.state][player.spriteDirection];
   const frameIndex =
     Math.floor(animationElapsed / 200) % animationFrames.length;

@@ -1,8 +1,7 @@
-import { createFpsCounter, renderFps } from './fps';
-import { gameLoop } from './gameLoop';
+import { createAnimationClock } from '@/game/createAnimationClock';
+import { runFpsCounter } from './fpsCounter';
 import { listenKeyboard } from './keyboard';
 import { createWorld } from './world/createWorld';
-import { World } from './world/World';
 import { renderWorld } from './world/renderWorld';
 
 export function runGame(parent: HTMLElement) {
@@ -20,49 +19,43 @@ export function runGame(parent: HTMLElement) {
     throw new Error('Canvas not supported');
   }
 
-  const world = createWorld();
   const pauseController = createPauseController();
-  const fpsCounter = createFpsCounter();
-  let firstLoop = true;
 
-  gameLoop(() => {
-    if (firstLoop) {
-      firstLoop = false;
-      world.clock.start();
+  const world = createWorld();
+  const animationClock = createAnimationClock();
+  animationClock.onTick((c) => {
+    if (!pauseController.isPaused()) {
+      world.clock.tick(c.lastTickDuration());
     }
-
-    world.clock.tick();
-    pauseController.update({ world });
-    fpsCounter.capture();
 
     renderWorld({
       canvasCtx,
       world,
     });
-    renderFps({ canvasCtx, fps: fpsCounter.fps() });
   });
+
+  runFpsCounter({ canvasCtx });
 }
 
 function createPauseController() {
+  const clock = createAnimationClock();
   const keyboardState = listenKeyboard();
-  let debounceStart = -1;
+  const state = { paused: false };
+
+  clock.onTick(() => {
+    if (testThrottle() && keyboardState.pressedKeys['Escape']) {
+      state.paused = !state.paused;
+      clock.reset();
+    }
+  });
 
   return {
-    update(props: { world: World }) {
-      const { world } = props;
-
-      if (testDebounce() && keyboardState.pressedKeys['Escape']) {
-        world.clock.toggle();
-        debounceStart = performance.now();
-      }
+    isPaused() {
+      return state.paused;
     },
   };
 
-  function testDebounce(): boolean {
-    if (debounceStart < 0) return true;
-
-    const now = performance.now();
-    const diff = now - debounceStart;
-    return diff > 500;
+  function testThrottle(): boolean {
+    return clock.timePassed() > 500;
   }
 }

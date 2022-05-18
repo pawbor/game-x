@@ -1,4 +1,4 @@
-import { runGame } from './game';
+import { runGame } from '@/game/runGame';
 
 bootstrapApp();
 
