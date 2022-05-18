@@ -4,6 +4,8 @@ import { Vector2d } from '@/vector2d/Vector2d';
 
 export interface WeaponConfig {
   sprites: WeaponSprites;
+  attackPower: number;
+  attackDuration: number;
 }
 
 export interface WeaponSprites {

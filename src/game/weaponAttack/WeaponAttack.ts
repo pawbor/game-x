@@ -7,4 +7,5 @@ export interface WeaponAttack extends DamageDealer {
   type: WeaponType;
   position: Vector2d;
   spriteDirection: SpriteDirection;
+  attackDuration: number;
 }

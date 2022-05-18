@@ -16,11 +16,14 @@ export function tryToDealDamage(props: {
   if (!testCollision(target.hitBox, source.hitBox)) return;
 
   target.health -= source.attackPower;
-  target.invincibilityTimer = createTimer({
-    referenceClock: clock,
-    duration: 300,
-    onDone: () => {
-      target.invincibilityTimer = undefined;
-    },
-  });
+
+  if (target.invincibilityDuration > 0) {
+    target.invincibilityTimer = createTimer({
+      referenceClock: clock,
+      duration: target.invincibilityDuration,
+      onDone: () => {
+        target.invincibilityTimer = undefined;
+      },
+    });
+  }
 }

@@ -25,7 +25,7 @@ export function initEnemies(props: {
 
       const { position } = tile;
       const hitBox = enemyHitBox({ type, position });
-      const config = getEnemyConfig(type);
+      const { maxHealth, invincibilityDuration } = getEnemyConfig(type);
 
       return {
         type,
@@ -33,7 +33,8 @@ export function initEnemies(props: {
         hitBox,
         state: CharacterState.Idle,
         animationStart: creationTime,
-        health: config.maxHealth,
+        health: maxHealth,
+        invincibilityDuration,
         invincibilityTimer: undefined,
       };
     })

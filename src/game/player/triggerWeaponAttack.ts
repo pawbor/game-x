@@ -16,7 +16,7 @@ export function triggerWeaponAttack(props: { player: Player; world: World }) {
 
   createTimer({
     referenceClock: clock,
-    duration: 200,
+    duration: weaponAttack.attackDuration,
     onDone: () => {
       updateState({ player, state: CharacterState.Idle, clock });
       removeItem({ array: weaponAttacks, item: weaponAttack });

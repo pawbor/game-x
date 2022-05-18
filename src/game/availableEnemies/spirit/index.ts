@@ -19,5 +19,6 @@ const sprites: EnemySprites = {
 
 export const config: EnemyConfig = {
   sprites,
-  maxHealth: 120,
+  maxHealth: 160,
+  invincibilityDuration: 100,
 };

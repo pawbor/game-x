@@ -26,7 +26,7 @@ function calcInvincibilityAlpha(timer: Timer): number {
   const timePassed = timer.timePassed();
   const duration = timeLeft + timePassed;
   const fullCircle = 2 * Math.PI;
-  const numberOfBlinks = Math.ceil(duration / 200);
+  const numberOfBlinks = Math.ceil(duration / 100);
   const progress = timePassed / duration;
   const radians = fullCircle * numberOfBlinks * progress;
   return (Math.cos(radians) + 1) / 2;

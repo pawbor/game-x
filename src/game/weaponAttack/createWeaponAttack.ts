@@ -1,4 +1,7 @@
-import { getWeaponAttackSprite } from '@/game/availableWeapons/getWeaponConfig';
+import {
+  getWeaponAttackSprite,
+  getWeaponConfig,
+} from '@/game/availableWeapons/getWeaponConfig';
 import { WeaponType } from '@/game/availableWeapons/WeaponType';
 import { create } from '@/game/hitBox/HitBox';
 import { Player } from '@/game/player/Player';
@@ -10,13 +13,15 @@ export function createWeaponAttack(props: { player: Player }): WeaponAttack {
   const { player } = props;
   const { wieldedWeapon: type, spriteDirection } = player;
   const position = calcPosition(player);
+  const { attackPower, attackDuration } = getWeaponConfig(type);
 
   return {
     type,
     position,
     hitBox: weaponHitBox({ type, position, spriteDirection }),
     spriteDirection,
-    attackPower: 20,
+    attackPower,
+    attackDuration,
   };
 }
 
