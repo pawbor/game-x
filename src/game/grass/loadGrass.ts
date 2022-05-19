@@ -1,3 +1,4 @@
+import { KnockBackRatio } from '@/game/damage/KnockBackRatio';
 import { Grass } from '@/game/grass/Grass';
 import { grassHitBox } from '@/game/grass/grassHitBox';
 import { Tile } from '@/game/tile/Tile';
@@ -19,5 +20,7 @@ function createGrass(tile: Tile): Grass {
     health: 1,
     invincibilityDuration: 0,
     invincibilityTimer: undefined,
+    knockBackResistance: KnockBackRatio.validate(1),
+    knockBack: undefined,
   };
 }

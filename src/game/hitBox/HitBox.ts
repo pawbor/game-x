@@ -2,6 +2,7 @@ import { Vector2d } from '@/vector2d/Vector2d';
 
 export interface HitBox {
   center: Vector2d;
+  leftTop: Vector2d;
   left: number;
   right: number;
   top: number;
@@ -24,14 +25,18 @@ export function create(props: CreateProps): HitBox {
 
 function fromCenter(props: Center): HitBox {
   const { width, height, center } = props;
+  const left = center[0] - width / 2;
+  const top = center[1] - height / 2;
+
   return {
-    left: center[0] - width / 2,
+    left,
     right: center[0] + width / 2,
-    top: center[1] - height / 2,
+    top,
     bottom: center[1] + height / 2,
     width,
     height,
     center,
+    leftTop: [left, top],
   };
 }
 

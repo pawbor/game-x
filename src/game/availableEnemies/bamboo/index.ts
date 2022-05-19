@@ -1,5 +1,6 @@
 import { EnemyConfig } from '@/game/availableEnemies/EnemyConfig';
 import { EnemySprites } from '@/game/availableEnemies/EnemySprites';
+import { KnockBackRatio } from '@/game/damage/KnockBackRatio';
 import { create } from '@/game/hitBox/HitBox';
 import { TileSize } from '@/game/tile/config';
 import { attack } from './attack';
@@ -21,4 +22,5 @@ export const config: EnemyConfig = {
   sprites,
   maxHealth: 80,
   invincibilityDuration: 300,
+  knockBackResistance: KnockBackRatio.validate(0.2)
 };

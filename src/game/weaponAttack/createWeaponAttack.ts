@@ -13,16 +13,31 @@ export function createWeaponAttack(props: { player: Player }): WeaponAttack {
   const { player } = props;
   const { wieldedWeapon: type, spriteDirection } = player;
   const position = calcPosition(player);
-  const { attackPower, attackDuration } = getWeaponConfig(type);
+  const { attackPower, attackDuration, knockBackPower } = getWeaponConfig(type);
 
   return {
     type,
     position,
     hitBox: weaponHitBox({ type, position, spriteDirection }),
     spriteDirection,
+    attackDirection: calcAttackDirection(spriteDirection),
     attackPower,
     attackDuration,
+    knockBackPower,
   };
+}
+
+function calcAttackDirection(spriteDirection: SpriteDirection): Vector2d {
+  switch (spriteDirection) {
+    case SpriteDirection.Down:
+      return [0, 1];
+    case SpriteDirection.Up:
+      return [0, -1];
+    case SpriteDirection.Right:
+      return [1, 0];
+    case SpriteDirection.Left:
+      return [-1, 0];
+  }
 }
 
 function calcPosition(player: Player): Vector2d {
