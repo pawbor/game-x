@@ -34,17 +34,19 @@ function safeHorizontal(props: {
     testCollision(obstacle, testBox)
   );
 
+  if (collisions.length < 1) return moveX;
+
   if (moveX > 0) {
-    return Math.min(
-      ...collisions.map((obstacle) => obstacle.left - movingHitBox.right),
-      moveX
+    const candidates = collisions.map(
+      (obstacle) => obstacle.left - movingHitBox.right
     );
+    return Math.max(0, Math.min(...candidates, moveX));
   }
 
-  return Math.max(
-    ...collisions.map((obstacle) => obstacle.right - movingHitBox.left),
-    moveX
+  const candidates = collisions.map(
+    (obstacle) => obstacle.right - movingHitBox.left
   );
+  return Math.min(0, Math.max(...candidates, moveX));
 }
 
 function safeVertical(props: {
@@ -65,22 +67,24 @@ function safeVertical(props: {
     testCollision(obstacle, testBox)
   );
 
+  if (collisions.length < 1) return moveY;
+
   if (moveY > 0) {
-    return Math.min(
-      ...collisions.map((obstacle) => obstacle.top - movingHitBox.bottom),
-      moveY
+    const candidates = collisions.map(
+      (obstacle) => obstacle.top - movingHitBox.bottom
     );
+    return Math.max(0, Math.min(...candidates, moveY));
   }
 
-  return Math.max(
-    ...collisions.map((obstacle) => obstacle.bottom - movingHitBox.top),
-    moveY
+  const candidates = collisions.map(
+    (obstacle) => obstacle.bottom - movingHitBox.top
   );
+  return Math.min(0, Math.max(...candidates, moveY));
 }
 
 function movedHitBox(props: { hitBox: HitBox; movement: Vector2d }): HitBox {
   const { hitBox, movement } = props;
   const { leftTop, width, height } = hitBox;
   const [left, top] = sum(movement, leftTop);
-  return create({ left: left + movement[0], top, width, height });
+  return create({ left, top, width, height });
 }

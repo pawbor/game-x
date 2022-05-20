@@ -26,6 +26,7 @@ export function renderWorld(props: {
     camera,
     clock,
     weaponAttacks,
+    boundaries,
   } = world;
   const { canvas } = canvasCtx;
 
@@ -42,7 +43,14 @@ export function renderWorld(props: {
   renderHitBoxes({
     canvasCtx,
     camera,
-    items: [player, ...grasses, ...enemies, ...staticObjects, ...weaponAttacks],
+    items: [
+      player,
+      ...grasses,
+      ...enemies,
+      ...staticObjects,
+      ...weaponAttacks,
+      ...boundaries,
+    ],
   });
 
   function grassRenderer(grass: Grass): YSortRenderer {

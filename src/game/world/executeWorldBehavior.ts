@@ -1,6 +1,6 @@
 import { followPlayer } from '@/game/camera/followPlayer';
 import { executeEnemyBehavior } from '@/game/enemy/executeEnemyBehavior';
-import { executeGrassBehavior } from '@/game/grass/executeWeaponAttackBehavior';
+import { executeGrassBehavior } from '@/game/grass/executeGrassBehavior';
 import { executePlayerBehavior } from '@/game/player/executePlayerBehavior';
 import { executeWeaponAttackBehavior } from '@/game/weaponAttack/executeWeaponAttackBehavior';
 import { World } from '@/game/world/World';
