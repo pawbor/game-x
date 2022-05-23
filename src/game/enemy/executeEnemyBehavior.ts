@@ -1,8 +1,10 @@
 import { removeItem } from '@/array/removeItem';
+import { CharacterState } from '@/game/character/CharacterState';
 import { calcMoveDirection } from '@/game/enemy/calcMoveDirection';
 import { Enemy } from '@/game/enemy/Enemy';
 import { knockBackEnemy } from '@/game/enemy/knockBackEnemy';
 import { moveEnemy } from '@/game/enemy/moveEnemy';
+import { canAttack, triggerEnemyAttack } from '@/game/enemy/triggerEnemyAttack';
 import { World } from '@/game/world/World';
 
 export function executeEnemyBehavior(props: { world: World; enemy: Enemy }) {
@@ -15,6 +17,7 @@ export function executeEnemyBehavior(props: { world: World; enemy: Enemy }) {
   }
 
   handleKnockBack();
+  handleAttack();
   handleMovement();
 
   function handleKnockBack() {
@@ -28,8 +31,17 @@ export function executeEnemyBehavior(props: { world: World; enemy: Enemy }) {
     });
   }
 
+  function handleAttack() {
+    if (enemy.state === CharacterState.Attack) return;
+
+    if (canAttack({ player, enemy })) {
+      triggerEnemyAttack({ enemy, world });
+    }
+  }
+
   function handleMovement() {
     if (enemy.knockBack) return;
+    if (enemy.state === CharacterState.Attack) return;
 
     const moveDirection = calcMoveDirection({ player, enemy });
 

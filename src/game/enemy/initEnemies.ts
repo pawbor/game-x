@@ -25,7 +25,7 @@ export function initEnemies(props: {
 
       const { position } = tile;
       const hitBox = enemyHitBox({ type, position });
-      const { maxHealth, invincibilityDuration, knockBackResistance } =
+      const { maxHealth, attackPower, invincibilityDuration, knockBackResistance, knockBackPower } =
         getEnemyConfig(type);
 
       return {
@@ -39,6 +39,8 @@ export function initEnemies(props: {
         invincibilityTimer: undefined,
         knockBackResistance,
         knockBack: undefined,
+        knockBackPower,
+        attackPower
       };
     })
     .filter(isNonNullable);

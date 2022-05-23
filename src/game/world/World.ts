@@ -6,8 +6,10 @@ import { Boundary } from '@/game/ground/Boundary';
 import { Player } from '@/game/player/Player';
 import { StaticObject } from '@/game/staticObject/StaticObject';
 import { WeaponAttack } from '@/game/weaponAttack/WeaponAttack';
+import { DamageDealer } from '@/game/damage/DamageDealer';
 
 export interface World {
+  enemyAttacks: DamageDealer[];
   weaponAttacks: WeaponAttack[];
   clock: Clock;
   camera: Camera;

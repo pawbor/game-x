@@ -11,6 +11,7 @@ export function triggerWeaponAttack(props: { player: Player; world: World }) {
   const { weaponAttacks, clock } = world;
 
   updateState({ player, state: CharacterState.Attack, clock });
+
   const weaponAttack = createWeaponAttack({ player });
   weaponAttacks.push(weaponAttack);
 

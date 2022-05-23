@@ -8,7 +8,13 @@ export function createWorld(): World {
   const clock = createClock();
   const camera = createCamera();
   const worldElements = loadWorldElements({ creationTime: clock.timePassed() });
-  const world: World = { ...worldElements, clock, camera, weaponAttacks: [] };
+  const world: World = {
+    ...worldElements,
+    clock,
+    camera,
+    weaponAttacks: [],
+    enemyAttacks: [],
+  };
   clock.onTick(() => executeWorldBehavior({ world }));
   return world;
 }

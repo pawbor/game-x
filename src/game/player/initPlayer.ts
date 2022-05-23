@@ -1,5 +1,6 @@
 import { WeaponType } from '@/game/availableWeapons/WeaponType';
 import { CharacterState } from '@/game/character/CharacterState';
+import { KnockBackRatio } from '@/game/damage/KnockBackRatio';
 import { listenKeyboard } from '@/game/keyboard';
 import { Player } from '@/game/player/Player';
 import { playerHitBox } from '@/game/player/playerHitBox';
@@ -26,5 +27,10 @@ export function initPlayer(props: {
     keyboardState: listenKeyboard(),
     animationStart: creationTime,
     wieldedWeapon: WeaponType.Sword,
+    health: 500,
+    invincibilityDuration: 400,
+    invincibilityTimer: undefined,
+    knockBack: undefined,
+    knockBackResistance: KnockBackRatio.validate(0.3),
   };
 }

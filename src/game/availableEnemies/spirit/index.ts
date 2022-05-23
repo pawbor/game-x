@@ -21,6 +21,8 @@ const sprites: EnemySprites = {
 export const config: EnemyConfig = {
   sprites,
   maxHealth: 160,
+  attackPower: 15,
   invincibilityDuration: 100,
-  knockBackResistance: KnockBackRatio.validate(0)
+  knockBackResistance: KnockBackRatio.validate(0),
+  knockBackPower: KnockBackRatio.validate(0),
 };
