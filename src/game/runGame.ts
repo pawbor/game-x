@@ -17,7 +17,7 @@ export function runGame(parent: HTMLElement) {
     transform: 'translate(-50%, -50%)',
   });
 
-  broken.innerHTML = 'This is a "broken" version (testing Vercel)';
+  broken.innerHTML = 'This is a "broken" version (testing Vercel 2)';
   parent.append(broken);
 
   const observer = new ResizeObserver((els) => {
