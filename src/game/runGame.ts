@@ -7,6 +7,18 @@ import { renderWorld } from './world/renderWorld';
 export function runGame(parent: HTMLElement) {
   const canvas = document.createElement('canvas');
   parent.append(canvas);
+  const broken = document.createElement('div');
+  Object.assign(broken.style, {
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    padding: '100px',
+    background: 'red',
+    transform: 'translate(-50%, -50%)',
+  });
+
+  broken.innerHTML = 'This is a "broken" version (testing Vercel)';
+  parent.append(broken);
 
   const observer = new ResizeObserver((els) => {
     canvas.width = els[0]?.borderBoxSize[0]?.inlineSize ?? 0;
